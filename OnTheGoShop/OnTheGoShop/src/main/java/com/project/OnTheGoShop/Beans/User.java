@@ -4,26 +4,32 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 @Entity(name="Users")
 public class User extends Person {
-	//List<Order> pendingOrder;
-	//List<Order> oldOrder;
+	List<Order> pendingOrder;
+	List<Order> oldOrder;
 	double lan;
 	double lat;
 	String cardNum;
-/*public List<Order> getPendingOrder() {
+
+	@OneToMany
+	public List<Order> getPendingOrder() {
+
 		return pendingOrder;
 	}
 	public void setPendingOrder(List<Order> pendingOrder) {
 		this.pendingOrder = pendingOrder;
 	}
+	@OneToMany
 	public List<Order> getOldOrder() {
 		return oldOrder;
 	}
 	public void setOldOrder(List<Order> oldOrder) {
 		this.oldOrder = oldOrder;
-	}*/
-/*	@Column
+	}
+	@Column
 	public double getLan() {
 		return lan;
 	}
@@ -44,5 +50,5 @@ public class User extends Person {
 	public void setCardNum(String cardNum) {
 		this.cardNum = cardNum;
 	}
-	*/
+
 }
