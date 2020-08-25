@@ -5,18 +5,18 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
-
-@Entity(name = "costumer")
+@Entity(name="Users")
 public class User extends Person {
 	List<Order> pendingOrder;
 	List<Order> oldOrder;
 	double lan;
 	double lat;
 	String cardNum;
+
 	@OneToMany
 	public List<Order> getPendingOrder() {
+
 		return pendingOrder;
 	}
 	public void setPendingOrder(List<Order> pendingOrder) {
@@ -50,5 +50,5 @@ public class User extends Person {
 	public void setCardNum(String cardNum) {
 		this.cardNum = cardNum;
 	}
-	
+
 }
