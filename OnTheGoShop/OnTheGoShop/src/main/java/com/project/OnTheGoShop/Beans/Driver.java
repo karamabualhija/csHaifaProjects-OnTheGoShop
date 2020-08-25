@@ -1,9 +1,14 @@
 package com.project.OnTheGoShop.Beans;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity(name = "driver")
 public class Driver extends Person {
 
 	int vanNum;
 
+	@Column
 	public int getVanNum() {
 		return vanNum;
 	}

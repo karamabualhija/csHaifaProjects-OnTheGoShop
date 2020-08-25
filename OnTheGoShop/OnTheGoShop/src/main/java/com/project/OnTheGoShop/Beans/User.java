@@ -4,21 +4,25 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
-@Entity
+@Entity(name = "costumer")
 public class User extends Person {
 	List<Order> pendingOrder;
 	List<Order> oldOrder;
 	double lan;
 	double lat;
 	String cardNum;
+	@OneToMany
 	public List<Order> getPendingOrder() {
 		return pendingOrder;
 	}
 	public void setPendingOrder(List<Order> pendingOrder) {
 		this.pendingOrder = pendingOrder;
 	}
+	@OneToMany
 	public List<Order> getOldOrder() {
 		return oldOrder;
 	}
