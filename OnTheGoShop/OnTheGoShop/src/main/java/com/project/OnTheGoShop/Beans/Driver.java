@@ -6,15 +6,15 @@ import javax.persistence.Entity;
 @Entity(name = "Driver")
 public class Driver extends Person {
 
-	int vanNum;
+    int vanNum;
 
-	@Column
-	public int getVanNum() {
-		return vanNum;
-	}
+    @Column
+    public int getVanNum() {
+        return vanNum;
+    }
 
-	public void setVanNum(int vanNum) {
-		this.vanNum = vanNum;
-	}
-	
+    public void setVanNum(int vanNum) {
+        this.vanNum = vanNum;
+    }
+
 }
