@@ -3,7 +3,7 @@ package com.project.OnTheGoShop.Beans;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "orders")
+@Entity(name = "Orders")
 public class Order {
 
 	int id;
