@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity(name="Users")
 public class User extends Person {
@@ -14,7 +14,7 @@ public class User extends Person {
 	double lat;
 	String cardNum;
 
-	@OneToMany
+	@ManyToMany
 	public List<Order> getPendingOrder() {
 
 		return pendingOrder;
@@ -22,7 +22,7 @@ public class User extends Person {
 	public void setPendingOrder(List<Order> pendingOrder) {
 		this.pendingOrder = pendingOrder;
 	}
-	@OneToMany
+	@ManyToMany
 	public List<Order> getOldOrder() {
 		return oldOrder;
 	}
