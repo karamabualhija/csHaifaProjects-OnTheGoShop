@@ -2,9 +2,8 @@ package com.project.OnTheGoShop.Beans;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "users")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-
 public abstract class Person {
 
 
