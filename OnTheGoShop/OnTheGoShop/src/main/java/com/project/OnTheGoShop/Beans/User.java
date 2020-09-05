@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.List;
 
-@Entity(name = "Users")
+@Entity
 public class User extends Person {
     List<Order> pendingOrder;
     List<Order> oldOrder;

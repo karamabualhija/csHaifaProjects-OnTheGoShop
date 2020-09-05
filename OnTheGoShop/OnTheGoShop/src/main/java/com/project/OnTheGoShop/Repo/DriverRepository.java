@@ -1,8 +1,12 @@
 package com.project.OnTheGoShop.Repo;
 
 import com.project.OnTheGoShop.Beans.Driver;
+
+import javax.transaction.Transactional;
+
 import org.springframework.data.repository.CrudRepository;
 
-public interface DriverRepository extends CrudRepository<Driver, Integer> {
+@Transactional
+public interface DriverRepository extends PersonRepository<Driver> ,CrudRepository<Driver, Integer> {
 
 }

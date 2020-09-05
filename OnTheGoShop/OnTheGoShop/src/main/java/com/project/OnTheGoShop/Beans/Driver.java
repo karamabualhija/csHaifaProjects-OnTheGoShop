@@ -3,7 +3,7 @@ package com.project.OnTheGoShop.Beans;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-@Entity(name = "Driver")
+@Entity
 public class Driver extends Person {
 
     int vanNum;

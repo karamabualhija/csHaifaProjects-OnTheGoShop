@@ -4,6 +4,10 @@ import com.project.OnTheGoShop.Beans.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
-public interface UserRepository extends CrudRepository<User, Integer> {
+
+import javax.transaction.Transactional;
+
+@Transactional
+public interface UserRepository extends PersonRepository<User> ,CrudRepository<User, Integer> {
     List<User> findById(int id);
 }
