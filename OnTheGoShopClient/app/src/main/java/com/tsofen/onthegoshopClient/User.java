@@ -1,19 +1,25 @@
-package com.project.OnTheGoShop.Beans;
-
-import javax.persistence.*;
-
-@Entity(name = "users")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class Person {
+package com.tsofen.onthegoshopClient;
 
 
+import java.util.List;
+
+public class User  {
+    List<Order> orders;
+    double lan;
+    double lat;
     String name;
     int sys_id;
     String username;
-    String password;
     String phonenumber;
 
-    @Column
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     public String getName() {
         return name;
     }
@@ -22,10 +28,6 @@ public abstract class Person {
         this.name = name;
     }
 
-
-
-    @Id
-    @GeneratedValue
     public int getSys_id() {
         return sys_id;
     }
@@ -34,7 +36,6 @@ public abstract class Person {
         this.sys_id = sys_id;
     }
 
-    @Column
     public String getUsername() {
         return username;
     }
@@ -43,16 +44,6 @@ public abstract class Person {
         this.username = username;
     }
 
-    @Column
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Column
     public String getPhonenumber() {
         return phonenumber;
     }
@@ -60,6 +51,23 @@ public abstract class Person {
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
+
+    public double getLan() {
+        return lan;
+    }
+
+    public void setLan(double lan) {
+        this.lan = lan;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
 
 
 }

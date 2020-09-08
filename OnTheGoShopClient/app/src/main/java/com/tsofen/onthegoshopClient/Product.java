@@ -1,30 +1,15 @@
-package com.project.OnTheGoShop.Beans;
+package com.tsofen.onthegoshopClient;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-@Entity(name = "Product")
+
 public class Product {
 
     int id;
     String name;
     double amount;
     float price;
-    String img;
-    
-    @Column
-    public String getImg() {
-		return img;
-	}
 
-	public void setImg(String img) {
-		this.img = img;
-	}
 
-	@Id
-    @GeneratedValue
     public int getId() {
         return id;
     }
@@ -33,7 +18,7 @@ public class Product {
         this.id = id;
     }
 
-    @Column
+
     public String getName() {
         return name;
     }
@@ -42,7 +27,7 @@ public class Product {
         this.name = name;
     }
 
-    @Column
+
     public double getAmount() {
         return amount;
     }
@@ -51,7 +36,7 @@ public class Product {
         this.amount = amount;
     }
 
-    @Column
+
     public float getPrice() {
         return price;
     }

@@ -7,30 +7,21 @@ import java.util.List;
 
 @Entity
 public class User extends Person {
-    List<Order> pendingOrder;
-    List<Order> oldOrder;
+    List<Order> Orders;
     double lan;
     double lat;
     String cardNum;
 
     @OneToMany
-    public List<Order> getPendingOrder() {
+    public List<Order> getOrders() {
 
-        return pendingOrder;
+        return Orders;
     }
 
     public void setPendingOrder(List<Order> pendingOrder) {
-        this.pendingOrder = pendingOrder;
+        this.Orders = pendingOrder;
     }
 
-    @OneToMany
-    public List<Order> getOldOrder() {
-        return oldOrder;
-    }
-
-    public void setOldOrder(List<Order> oldOrder) {
-        this.oldOrder = oldOrder;
-    }
 
     @Column
     public double getLan() {
