@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/productImagecart"
+            android:layout_weight="2">
+
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/productNameCart"
+                android:layout_weight="1">
+
+            </TextView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/productpriceCart"
+                android:layout_weight="1"
+                >
+
+            </TextView>
+
+        </LinearLayout>
+        <Spinner
+            android:id="@+id/amount_spinner"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center||right"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_gravity="center||right"
+            android:layout_height="50dp"
+            android:id="@+id/AddButton"
+            android:text="delete"
+            android:onClick="deletfromcart"
+            android:layout_weight="1"
+
+
+            ></Button>
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
