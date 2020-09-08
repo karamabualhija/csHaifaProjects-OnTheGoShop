@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<color name="colorPrimary">#6200EE</color>
+<color name="colorPrimaryDark">#3700B3</color>
+<color name="colorAccent">#03DAC5</color>
+<color name="appBlue">#2675B8</color>
+<color name="white">#FFFFFF</color>
+<color name="iconColor">#E0A374</color>
+<color name="topLine">#2B327A</color>
+<color name="middleLine">#2675B8</color>
+<color name="littleLine">#50575D</color>
+<color name="mainScene">#E4E8E9</color>
+<color name="borderColor">#44667F</color>
+<color name="background">#F0F4F3</color>
+<color name="black">#000000</color>
+    <color name ="buttonblue">#63DCFF</color>
+</resources>
