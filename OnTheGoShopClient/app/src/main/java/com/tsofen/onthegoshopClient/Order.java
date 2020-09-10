@@ -1,28 +1,14 @@
-package com.project.OnTheGoShop.Beans;
+package com.tsofen.onthegoshopClient;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "Orders")
 public class Order {
 
     int id;
     List<Product> products;
     float totalPrice;
-    float totalWeight;
-    boolean Pending;
-    
-    @Column
-    public boolean isPending() {
-		return Pending;
-	}
 
-	public void setPending(boolean pending) {
-		Pending = pending;
-	}
 
-	@Id
-    @GeneratedValue
     public int getId() {
         return id;
     }
@@ -31,7 +17,6 @@ public class Order {
         this.id = id;
     }
 
-    @ManyToMany
     public List<Product> getProducts() {
         return products;
     }
@@ -40,7 +25,6 @@ public class Order {
         this.products = products;
     }
 
-    @Column
     public float getTotalPrice() {
         return totalPrice;
     }
@@ -49,13 +33,5 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    @Column
-    public float getTotalWeight() {
-        return totalWeight;
-    }
-
-    public void setTotalWeight(float totalWeight) {
-        this.totalWeight = totalWeight;
-    }
 
 }
