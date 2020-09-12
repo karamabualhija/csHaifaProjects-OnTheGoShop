@@ -8,7 +8,15 @@ public class Product {
     String name;
     double amount;
     float price;
+    private int ImageResId;
 
+    public int getImageResId() {
+        return ImageResId;
+    }
+
+    public void setImageResId(int imageResId) {
+        ImageResId = imageResId;
+    }
 
     public int getId() {
         return id;
