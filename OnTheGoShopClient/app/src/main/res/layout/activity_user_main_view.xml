@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user_main_view"
+    tools:context=".UserMainView"
     android:background="@color/background">
 
     <LinearLayout
@@ -52,12 +52,12 @@
                 android:focusable="true"
                 android:layout_weight="1"/>
         </LinearLayout>
-
-        <ListView
+        <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/userListView"
-            android:layout_marginBottom="50dp"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/userFragmentContainer"
+            android:layout_marginBottom="50dp"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
