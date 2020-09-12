@@ -5,9 +5,54 @@
     android:layout_height="match_parent"
     tools:context=".UserProductList">
 
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/UserProductMainView"/>
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="@string/on_the_go"
+            android:textColor="@color/black"
+            android:textSize="36sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@drawable/roundedbutton"
+                android:gravity="center"
+                android:hint="@string/search"
+                android:layout_weight="7"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:src="@drawable/search_img"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:src="@drawable/filter_img"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/UserProductMainView"/>
+
+    </LinearLayout>
+
 
 </FrameLayout>
