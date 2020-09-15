@@ -12,7 +12,7 @@ public class OnTheGoShopApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(OnTheGoShopApplication.class, args);
         Manager manager = new Manager();
-   //     manager.setID("32156416");
+      //  manager.setID("32156416");
         manager.setName("karam abu alhija");
         manager.setPassword("there");
         manager.setPhonenumber("0546074508");
