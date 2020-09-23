@@ -14,7 +14,7 @@ public class ManagerBL {
     @Autowired
     PersonRepository managerRepository;
 
-    public boolean register(Manager manager){
+  /*  public boolean register(Manager manager){
         Person bySys_id = managerRepository.findByID(manager.getID());
         if (!(bySys_id instanceof Manager)){
             managerRepository.save(manager);
@@ -30,5 +30,5 @@ public class ManagerBL {
             return true;
         }
         return false;
-    }
+    }*/
 }
