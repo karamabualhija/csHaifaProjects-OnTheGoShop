@@ -18,4 +18,19 @@
     <string name="my_orders">My Orders</string>
     <string name="all_orders">All Orders</string>
     <string name="old_orders">Old Orders</string>
+    <string name="storage">Storage</string>
+    <string name="vans">Vans</string>
+    <string name="drivers">Drivers</string>
+    <string name="users">Users</string>
+    <string name="orders">Orders</string>
+    <string name="new_product">New Product</string>
+    <string name="product_name">Product name</string>
+    <string name="product_amount">Product Amount</string>
+    <string name="product_price">Product Price</string>
+    <string name="add_product">add Product</string>
+    <string name="new_driver">New Driver</string>
+    <string name="driver_full_name">Driver Full name</string>
+    <string name="confirm">Confirm Password</string>
+    <string name="van_number">Van Number</string>
+    <string name="add_driver">Add Driver</string>
 </resources>
