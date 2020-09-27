@@ -1,9 +1,11 @@
-package com.tsofen.onthegoshopClient;
+package com.tsofen.onthegoshopClient.Register;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+
+import com.tsofen.onthegoshopClient.R;
 
 public class register extends AppCompatActivity {
 

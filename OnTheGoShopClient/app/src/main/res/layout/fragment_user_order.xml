@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserOrderFragment"
-    android:orientation="vertical">
+    tools:context=".UserViews.UserOrderFragment"
+    android:orientation="vertical"
+    android:background="@color/background">
 
     <TextView
         android:layout_width="wrap_content"

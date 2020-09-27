@@ -1,10 +1,13 @@
-package com.tsofen.onthegoshopClient;
+package com.tsofen.onthegoshopClient.UserViews;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 import android.view.View;
+
+import com.tsofen.onthegoshopClient.Adapters.FragmentAdapter;
+import com.tsofen.onthegoshopClient.R;
 
 public class UserMainView extends AppCompatActivity {
 

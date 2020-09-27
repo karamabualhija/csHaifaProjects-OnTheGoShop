@@ -1,4 +1,4 @@
-package com.tsofen.onthegoshopClient;
+package com.tsofen.onthegoshopClient.Beans;
 
 import java.util.List;
 
