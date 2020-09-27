@@ -1,6 +1,9 @@
 package com.project.OnTheGoShop.Beans;
 
 import javax.persistence.*;
+
+import org.json.simple.JSONObject;
+
 import java.util.List;
 
 @Entity(name = "Van")
@@ -66,6 +69,18 @@ public class Van {
     public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
+
+	@SuppressWarnings("unchecked")
+	public JSONObject toJson1() {
+		   JSONObject jo = new JSONObject();
+		   jo.put("id", this.id);
+		   jo.put("capacity", this.capacity);
+		   
+		   return jo;
+		
+
+	}
+
 
 
 }

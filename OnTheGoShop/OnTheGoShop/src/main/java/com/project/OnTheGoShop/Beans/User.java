@@ -3,6 +3,10 @@ package com.project.OnTheGoShop.Beans;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONObject;
+
 import java.util.List;
 
 @Entity
@@ -50,4 +54,23 @@ public class User extends Person {
         this.cardNum = cardNum;
     }
 
+	@Override
+	public void updatesession(HttpSession session) {
+		   session.setAttribute("name", this.name);
+		   session.setAttribute("username", this.username);
+		   session.setAttribute("phonemumber", this.phonenumber);
+		   session.setAttribute("type", "user");
+		
+	}
+
+	public JSONObject toJson()
+	{
+		   JSONObject jo = new JSONObject();
+		   jo.put("name", this.name);
+		   jo.put("username", this.username);
+		   jo.put("phone", this.phonenumber);
+
+		   
+		   return jo;
+	}
 }

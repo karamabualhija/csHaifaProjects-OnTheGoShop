@@ -1,6 +1,9 @@
 package com.project.OnTheGoShop.Beans;
 
 import javax.persistence.*;
+
+import org.json.simple.JSONObject;
+
 import java.util.List;
 
 @Entity(name = "Orders")
@@ -9,7 +12,7 @@ public class Order {
     int id;
     List<Product> products;
     float totalPrice;
-    float totalWeight;
+  //  float totalWeight;
     boolean Pending;
     
     @Column
@@ -49,13 +52,31 @@ public class Order {
         this.totalPrice = totalPrice;
     }
 
-    @Column
+/*    @Column
     public float getTotalWeight() {
         return totalWeight;
     }
 
     public void setTotalWeight(float totalWeight) {
         this.totalWeight = totalWeight;
-    }
+    }*/
+
+	@SuppressWarnings("unchecked")
+	public JSONObject toJson1() {
+		   JSONObject jo = new JSONObject();
+		   jo.put("id", this.id);
+		   jo.put("price", this.totalPrice);
+		   return jo;
+	}
+	private void  updatetotalprice()
+	{
+		int sum=0;
+	    for(int i=0;i<products.size();i++)
+	    {
+	    	sum+=(products.get(i).getPrice());
+	    }
+	    this.totalPrice=sum;
+
+	}
 
 }

@@ -1,8 +1,12 @@
 package com.project.OnTheGoShop.Beans;
 
+import java.security.MessageDigest;
+
 import javax.persistence.*;
+import javax.servlet.http.HttpSession;
 
 @Entity(name = "users")
+@Table(uniqueConstraints =  @UniqueConstraint(columnNames = { "username" }))
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Person {
 
@@ -13,7 +17,20 @@ public abstract class Person {
     String password;
     String phonenumber;
 
-    @Column
+    public Person() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Person(String name, String username, String password, String phonenumber) {
+		super();
+		this.name = name;
+		this.username = username;
+		this.password = password;
+		this.phonenumber = phonenumber;
+	}
+
+	@Column
     public String getName() {
         return name;
     }
@@ -60,6 +77,33 @@ public abstract class Person {
     public void setPhonenumber(String phonenumber) {
         this.phonenumber = phonenumber;
     }
+    
+	public void updatesession(HttpSession session) {
+		
+	}
+	public boolean validate(String pass)
+	{
+
+		return (hashPassword(pass).equals(this.password));
+	}
+	protected String hashPassword(String base)
+	{
+	    try{
+	        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	        byte[] hash = digest.digest(base.getBytes("UTF-8"));
+	        StringBuffer hexString = new StringBuffer();
+
+	        for (int i = 0; i < hash.length; i++) {
+	            String hex = Integer.toHexString(0xff & hash[i]);
+	            if(hex.length() == 1) hexString.append('0');
+	            hexString.append(hex);
+	        }
+	        return hexString.toString();
+	    } catch(Exception ex){
+	       throw new RuntimeException(ex);
+	    }
+	}
+
 
 
 }
