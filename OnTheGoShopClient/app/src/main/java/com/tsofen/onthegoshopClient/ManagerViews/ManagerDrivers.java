@@ -1,8 +1,10 @@
-package com.tsofen.onthegoshopClient;
+package com.tsofen.onthegoshopClient.ManagerViews;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
+import com.tsofen.onthegoshopClient.R;
 
 public class ManagerDrivers extends AppCompatActivity {
 

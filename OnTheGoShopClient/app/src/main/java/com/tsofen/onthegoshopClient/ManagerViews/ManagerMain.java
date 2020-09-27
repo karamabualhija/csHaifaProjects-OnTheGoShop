@@ -1,10 +1,12 @@
-package com.tsofen.onthegoshopClient;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.tsofen.onthegoshopClient.ManagerViews;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.tsofen.onthegoshopClient.R;
 
 public class ManagerMain extends AppCompatActivity {
 

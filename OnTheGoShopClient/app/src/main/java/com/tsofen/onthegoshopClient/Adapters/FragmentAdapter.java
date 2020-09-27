@@ -1,4 +1,4 @@
-package com.tsofen.onthegoshopClient;
+package com.tsofen.onthegoshopClient.Adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

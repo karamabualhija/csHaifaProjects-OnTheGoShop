@@ -12,19 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".NewDriver"></activity>
-        <activity android:name=".newProduct" />
-        <activity android:name=".ManagerOrders" />
-        <activity android:name=".ManagerUsers" />
-        <activity android:name=".ManagerVans" />
-        <activity android:name=".ManagerDrivers" />
-        <activity android:name=".ManagerStorage" />
-        <activity android:name=".ManagerMain" />
         <activity
-            android:name=".UserMainView"
+            android:name=".UserViews.UserMainView"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".register" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ManagerViews.ManagerDrivers"/>
+        <activity android:name=".ManagerViews.ManagerMain"/>
+        <activity android:name=".ManagerViews.ManagerOrders"/>
+        <activity android:name=".ManagerViews.ManagerStorage"/>
+        <activity android:name=".ManagerViews.ManagerUsers"/>
+        <activity android:name=".ManagerViews.ManagerVans"/>
+        <activity android:name=".ManagerViews.newProduct"/>
+        <activity android:name=".ManagerViews.NewDriver"/>
+        <activity android:name=".Register.register" />
+        <activity android:name=".LogIn.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.tsofen.onthegoshopClient;
+package com.tsofen.onthegoshopClient.UserViews;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+
+import com.tsofen.onthegoshopClient.R;
 
 
 public class UserCartFragment extends Fragment {

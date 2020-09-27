@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="horizontal">
+
 
         <ImageView
             android:layout_width="150dp"
@@ -38,27 +37,21 @@
             </TextView>
 
         </LinearLayout>
-        <Spinner
-            android:id="@+id/amount_spinner"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center||right"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_gravity="center||right"
-            android:layout_height="50dp"
-            android:id="@+id/AddButton"
-            android:text="delete"
-            android:onClick="deletfromcart"
-            android:layout_weight="1"
+<!--        <Spinner-->
+<!--            android:id="@+id/amount_spinner"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_gravity="center||end"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_weight="1"-->
+<!--            />-->
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_gravity="center||end"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:id="@+id/AddButton"-->
+<!--            android:text="delete"-->
+<!--            android:onClick="deletfromcart"-->
+<!--            android:layout_weight="1"-->
+<!--            />-->
 
-
-            ></Button>
-
-
-    </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

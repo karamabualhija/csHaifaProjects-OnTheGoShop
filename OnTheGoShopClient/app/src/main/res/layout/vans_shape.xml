@@ -32,16 +32,16 @@
 
             </TextView>
         </LinearLayout>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_gravity="center||right"
-            android:layout_height="50dp"
-            android:id="@+id/locationButton"
-            android:text="Location"
-            android:onClick="location"
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_gravity="center||right"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:id="@+id/locationButton"-->
+<!--            android:text="Location"-->
+<!--            android:onClick="location"-->
 
 
-            ></Button>
+<!--            ></Button>-->
 
 
     </LinearLayout>

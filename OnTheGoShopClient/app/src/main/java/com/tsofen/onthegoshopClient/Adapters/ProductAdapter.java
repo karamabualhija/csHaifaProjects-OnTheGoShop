@@ -1,14 +1,15 @@
-package com.tsofen.onthegoshopClient;
+package com.tsofen.onthegoshopClient.Adapters;
 
 import android.content.Context;
-import android.media.Image;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.tsofen.onthegoshopClient.Beans.Product;
+import com.tsofen.onthegoshopClient.R;
 
 import java.util.ArrayList;
 
