@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -38,6 +39,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        if(sharedPreferences.contains("loggedIn")){
+            String sharedUsername = sharedPreferences.getString("username", "");
+            String sharedPhoneNum = sharedPreferences.getString("phone", "");
+            String sharedName = sharedPreferences.getString("name", "");
+            User user = new User();
+            user.setUsername(sharedUsername);
+            user.setName(sharedName);
+            user.setPhonenumber(sharedPhoneNum);
+            Intent intent = new Intent(this, UserMainView.class);
+            finishAffinity();
+            startActivity(intent);
+        }
     }
 
     public void logIn(View view) {
@@ -71,8 +86,14 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", user.getUsername());
+                        editor.putString("name", user.getName());
+                        editor.putString("phone", user.getPhonenumber());
+                        editor.putBoolean("loggedIn", true);
+                        editor.apply();
                         Intent intent = new Intent(MainActivity.this, UserMainView.class);
-                        intent.putExtra("loggedInUser",user);
                         finishAffinity();
                         startActivity(intent);
                     }
@@ -130,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        logInHandlerThread.quit();
+        if (logInHandlerThread!=null) {
+            logInHandlerThread.quit();
+        }
     }
 }

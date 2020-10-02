@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,6 +29,15 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         ImageView proimg=layout.findViewById(R.id.productImage);
         TextView proname= layout.findViewById(R.id.productName);
         TextView proprice = layout.findViewById(R.id.productprice);
+        Button addButton = layout.findViewById(R.id.AddButton);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         proimg.setImageResource(pro.getImageResId());
         proname.setText(pro.getName());
         proprice.setText(Float.toString(pro.getPrice()));
