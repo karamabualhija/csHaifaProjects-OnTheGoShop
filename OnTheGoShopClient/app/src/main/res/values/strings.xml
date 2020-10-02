@@ -33,4 +33,8 @@
     <string name="confirm">Confirm Password</string>
     <string name="van_number">Van Number</string>
     <string name="add_driver">Add Driver</string>
+    <string name="this_field_is_required">this field is required</string>
+    <string name="the_passwords_don_t_match">The passwords don\'t match</string>
+    <string name="don_t_have_an_account_register">Don\'t have an account? Register</string>
+    <string name="full_name">Full name</string>
 </resources>
