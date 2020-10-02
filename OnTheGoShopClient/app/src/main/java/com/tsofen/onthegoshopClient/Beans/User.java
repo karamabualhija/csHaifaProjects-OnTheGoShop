@@ -1,9 +1,10 @@
 package com.tsofen.onthegoshopClient.Beans;
 
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User  {
+public class User implements Serializable {
     List<Order> orders;
     double lan;
     double lat;
@@ -11,6 +12,7 @@ public class User  {
     int sys_id;
     String username;
     String phonenumber;
+    String password;
 
     public List<Order> getOrders() {
         return orders;
@@ -68,6 +70,12 @@ public class User  {
         this.lat = lat;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
+    public String getPassword() {
+        return password;
+    }
 
 }

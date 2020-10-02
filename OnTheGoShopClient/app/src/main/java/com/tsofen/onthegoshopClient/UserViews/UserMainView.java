@@ -7,17 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.tsofen.onthegoshopClient.Adapters.FragmentAdapter;
+import com.tsofen.onthegoshopClient.Beans.User;
 import com.tsofen.onthegoshopClient.R;
 
 public class UserMainView extends AppCompatActivity {
 
     private ViewPager mViewPager;
+    static public User loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_user_main_view);
+        loggedInUser = (User) getIntent().getExtras().get("loggedInUser");
         mViewPager = (ViewPager) findViewById(R.id.userFragmentContainer);
         //setup the pager
         setupViewPager(mViewPager);
