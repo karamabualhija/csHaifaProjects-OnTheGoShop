@@ -13,13 +13,11 @@ import com.tsofen.onthegoshopClient.R;
 public class UserMainView extends AppCompatActivity {
 
     private ViewPager mViewPager;
-    static public User loggedInUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main_view);
-        loggedInUser = (User) getIntent().getExtras().get("loggedInUser");
         mViewPager = (ViewPager) findViewById(R.id.userFragmentContainer);
         //setup the pager
         setupViewPager(mViewPager);
@@ -51,4 +49,5 @@ public class UserMainView extends AppCompatActivity {
     public void setInfoFragment(View view) {
         setViewPager(3);
     }
+
 }

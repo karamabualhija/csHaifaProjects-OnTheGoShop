@@ -30,7 +30,8 @@ public class UserProductList extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_product_list, container, false);
 
         userListView =  (ListView) view.findViewById(R.id.UserProductMainView);
-        //TODO create the adapter adn set it to the list.
+
+
 
         return view;
     }
