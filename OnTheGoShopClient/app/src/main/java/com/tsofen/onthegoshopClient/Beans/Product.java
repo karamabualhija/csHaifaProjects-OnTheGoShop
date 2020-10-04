@@ -10,6 +10,15 @@ public class Product {
     float price;
     private int ImageResId;
 
+    public Product(String name, double amount, float price) {
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+    }
+
+    public Product() {
+    }
+
     public int getImageResId() {
         return ImageResId;
     }

@@ -6,52 +6,49 @@
     android:orientation="horizontal">
 
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/productImagecart"
-            android:layout_weight="2">
+    <ImageView
+        android:id="@+id/productImagecart"
+        android:layout_width="151dp"
+        android:layout_height="150dp"
+        android:layout_weight="2">
 
-        </ImageView>
+    </ImageView>
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="204dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/productNameCart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="vertical">
+            android:layout_height="49dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/productNameCart"
-                android:layout_weight="1">
+        </TextView>
 
-            </TextView>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/productpriceCart"
-                android:layout_weight="1"
-                >
+        <TextView
+            android:id="@+id/productpriceCart"
+            android:layout_width="match_parent"
+            android:layout_height="49dp">
 
-            </TextView>
+        </TextView>
 
-        </LinearLayout>
-<!--        <Spinner-->
-<!--            android:id="@+id/amount_spinner"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_gravity="center||end"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_weight="1"-->
-<!--            />-->
-<!--        <Button-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_gravity="center||end"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:id="@+id/AddButton"-->
-<!--            android:text="delete"-->
-<!--            android:onClick="deletfromcart"-->
-<!--            android:layout_weight="1"-->
-<!--            />-->
+        <Spinner
+            android:id="@+id/amount_spinner"
+            android:layout_width="153dp"
+            android:layout_height="73dp"
+            android:layout_gravity="center|end"
+         />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/DeleteCartBtn"
+        android:layout_width="133dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center|end"
+        android:layout_weight="1"
+        android:text="delete" />
 
 </LinearLayout>

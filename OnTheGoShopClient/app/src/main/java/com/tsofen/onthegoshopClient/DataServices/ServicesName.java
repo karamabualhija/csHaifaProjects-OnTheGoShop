@@ -2,7 +2,8 @@ package com.tsofen.onthegoshopClient.DataServices;
 
 public enum ServicesName {
     LogIn("login"),
-    Register("register");
+    Register("register"),
+    AllProducts("allProducts");
     String url;
 
     ServicesName(String url){
