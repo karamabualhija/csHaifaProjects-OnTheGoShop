@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.tsofen.onthegoshopClient.Beans.Product;
@@ -32,14 +34,16 @@ public class Cart_ProductAdapter extends ArrayAdapter<Product> {
         ImageView proimg=layout.findViewById(R.id.productImagecart);
         TextView proname= layout.findViewById(R.id.productNameCart);
         TextView proprice = layout.findViewById(R.id.productpriceCart);
-//        Spinner spin=layout.findViewById(R.id.amount_spinner);
+        Spinner spin=layout.findViewById(R.id.amount_spinner);
+        Button button = layout.findViewById(R.id.DeleteCartBtn);
 
+        button.setId(position);
         proimg.setImageResource(pro.getImageResId());
         proname.setText(pro.getName());
         proprice.setText(Float.toString(pro.getPrice()));
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, options);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spin.setAdapter(adapter);
+        spin.setAdapter(adapter);
 
         return layout;
 
