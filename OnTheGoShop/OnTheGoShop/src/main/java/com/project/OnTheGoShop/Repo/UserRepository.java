@@ -4,7 +4,6 @@ import com.project.OnTheGoShop.Beans.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.transaction.Transactional;
 

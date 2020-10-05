@@ -10,3 +10,4 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
 	public ArrayList<Order> findAll();
 	public Order findById(int id);
 }
+

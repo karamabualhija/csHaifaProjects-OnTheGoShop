@@ -1,64 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="horizontal">
+
+
+    <ImageView
+        android:id="@+id/productImagecart"
+        android:layout_width="151dp"
+        android:layout_height="150dp"
+        android:layout_weight="2">
+
+    </ImageView>
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="204dp"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_weight="3"
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:id="@+id/productImagecart"
-            android:layout_weight="2">
-
-        </ImageView>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/productNameCart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:orientation="vertical">
+            android:layout_height="49dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/productNameCart"
-                android:layout_weight="1">
+        </TextView>
 
-            </TextView>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/productpriceCart"
-                android:layout_weight="1"
-                >
+        <TextView
+            android:id="@+id/productpriceCart"
+            android:layout_width="match_parent"
+            android:layout_height="49dp">
 
-            </TextView>
+        </TextView>
 
-        </LinearLayout>
         <Spinner
             android:id="@+id/amount_spinner"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center||right"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_gravity="center||right"
-            android:layout_height="50dp"
-            android:id="@+id/AddButton"
-            android:text="delete"
-            android:onClick="deletfromcart"
-            android:layout_weight="1"
-
-
-            ></Button>
-
+            android:layout_width="153dp"
+            android:layout_height="73dp"
+            android:layout_gravity="center|end"
+         />
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/DeleteCartBtn"
+        android:layout_width="133dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center|end"
+        android:layout_weight="1"
+        android:text="delete" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
