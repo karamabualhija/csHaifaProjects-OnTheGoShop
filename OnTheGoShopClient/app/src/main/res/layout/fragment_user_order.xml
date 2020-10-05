@@ -19,16 +19,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_weight="1"
-            android:text="@string/all_orders"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:background="@drawable/linaer_pressed"
+            android:id="@+id/allOrderLin"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/all_orders"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true"
             android:layout_weight="1"
-            android:text="@string/old_orders"/>
+            android:background="@drawable/linaer_pressed"
+            android:id="@+id/oldOrderLin"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/old_orders"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textColor="@color/black"/>
+
+        </LinearLayout>
     </LinearLayout>
     <ListView
         android:layout_width="match_parent"
