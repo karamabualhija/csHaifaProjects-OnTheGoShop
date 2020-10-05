@@ -15,4 +15,5 @@
     <color name="black">#000000</color>
     <color name ="buttonblue">#63DCFF</color>
     <color name ="red">#FF0000</color>
+    <color name ="silver">#C0C0C0</color>
 </resources>

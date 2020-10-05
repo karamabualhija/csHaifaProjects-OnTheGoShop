@@ -3,7 +3,10 @@ package com.tsofen.onthegoshopClient.DataServices;
 public enum ServicesName {
     LogIn("login"),
     Register("register"),
-    AllProducts("allProducts");
+    AllProducts("allProducts"),
+    AllOrders("allOrders"),
+    OldOrders("oldOrders"),
+    OrderDetails("orderDetails");
     String url;
 
     ServicesName(String url){
