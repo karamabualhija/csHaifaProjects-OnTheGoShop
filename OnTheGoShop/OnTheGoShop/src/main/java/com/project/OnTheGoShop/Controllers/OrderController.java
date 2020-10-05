@@ -25,14 +25,10 @@ public class OrderController {
 	@Autowired
 	UserBL userbl;
 	
+	@SuppressWarnings("unchecked")
 	@GetMapping("ActiveOrders")
 	JSONArray getActiveOrders(HttpSession session)
-	{	/*
-		return active_orders:
-		orders_id
-		orders_price
-		*/
-		//ArrayList<Order> res=orderbl.findallorders();
+	{
 		int sys_id=(int) session.getAttribute("id");
 		ArrayList<Order> res=(ArrayList<Order>) userbl.finduserorders(sys_id);
 	    JSONArray jsonArray = new JSONArray();
@@ -43,14 +39,10 @@ public class OrderController {
 	    return jsonArray;
 		
 	}
+	@SuppressWarnings("unchecked")
 	@GetMapping("OldOrders")
 	JSONArray getOldOrders(HttpSession session)
-	{	/*
-		return old_orders:
-		orders_id
-		orders_price
-		*/
-	//	ArrayList<Order> res=orderbl.findallorders();
+	{
 		int sys_id=(int) session.getAttribute("id");
 		ArrayList<Order> res=(ArrayList<Order>) userbl.finduserorders(sys_id);
 	    JSONArray jsonArray = new JSONArray();
@@ -60,6 +52,7 @@ public class OrderController {
 	    }
 	    return jsonArray;
 	}
+	@SuppressWarnings("unchecked")
 	@GetMapping("getUserOrders")
 	JSONArray getUserOrders(@RequestParam String username)
 	{
@@ -72,12 +65,10 @@ public class OrderController {
 	    return jsonArray;
 	}
 
+	@SuppressWarnings("unchecked")
 	@GetMapping("AllOrders")
 	JSONArray getAllOrders()
 	{
-		/* all orders: id 
-		price
-		*/
 		ArrayList<Order> res=(ArrayList<Order>) orderbl.findallorders();
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size()&&!(res.get(i).isPending());i++)
@@ -86,15 +77,19 @@ public class OrderController {
 	    }
 	    return jsonArray;
 	}
-/*@GetMapping("OrderPro")
+   @GetMapping("OrderPro")
 	JSONArray getOrderProducts(@RequestParam int orders_id)
-	{	/*
-		products:
-		name, price, amount(orderd)
-		orders_id
-		orders_price
-		*
-		
-	}**/
+	{	
+
+	   return orderbl.findallorderpro(orders_id);
+
+	}
+   @GetMapping("Orderprice")
+	double getOrderPice(@RequestParam int orders_id)
+	{	
+
+	   return orderbl.findprice(orders_id);
+
+	}
 
 }

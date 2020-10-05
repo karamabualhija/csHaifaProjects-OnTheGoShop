@@ -34,9 +34,7 @@ public class DriverController {
 	@SuppressWarnings("unchecked")
 	@GetMapping("getAllDrivers")
 	JSONArray getAllDrivers()
-	{/* name 
-phone
-vannum */
+	{
 		ArrayList<Driver> res=driverbl.findalldrivers();
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size();i++)
@@ -44,8 +42,6 @@ vannum */
 	    	jsonArray.add(res.get(i).toJson());
 	    }
 	    return jsonArray;
-		
-		
 	}
 
 }

@@ -75,6 +75,7 @@ public class Product {
 		   jo.put("id", this.id);
 		   jo.put("name", this.name);
 		   jo.put("amount", this.amount);
+		   jo.put("price", this.price);
 		   return jo;
 	}
 

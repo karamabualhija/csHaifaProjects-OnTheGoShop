@@ -12,23 +12,23 @@ public abstract class Person {
 
 
     String name;
-    int sys_id;
+    int id;
     String username;
     String password;
     String phonenumber;
 
-    public Person() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Person(String name, String username, String password, String phonenumber) {
-		super();
-		this.name = name;
-		this.username = username;
-		this.password = password;
-		this.phonenumber = phonenumber;
-	}
+//    public Person() {
+//		super();
+//		// TODO Auto-generated constructor stub
+//	}
+//
+//	public Person(String name, String username, String password, String phonenumber) {
+//		super();
+//		this.name = name;
+//		this.username = username;
+//		this.password = password;
+//		this.phonenumber = phonenumber;
+//	}
 
 	@Column
     public String getName() {
@@ -43,13 +43,15 @@ public abstract class Person {
 
     @Id
     @GeneratedValue
-    public int getSys_id() {
-        return sys_id;
-    }
+    public int getId() {
+		return id;
+	}
 
-    public void setSys_id(int sys_id) {
-        this.sys_id = sys_id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 
     @Column
     public String getUsername() {

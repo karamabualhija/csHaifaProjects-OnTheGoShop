@@ -3,10 +3,11 @@ package com.project.OnTheGoShop.BL;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.project.OnTheGoShop.Beans.Product;
 import com.project.OnTheGoShop.Repo.ProductRepository;
-
+@Service
 public class ProductBL {
 	@Autowired
 	ProductRepository productRepository;

@@ -14,8 +14,24 @@ public class Van {
     double latitude;
     List<Product> products;
     List<Order> orders;
+    
 
-    @Id
+    public Van(int id, double capacity, double lang, double latitude, List<Product> products, List<Order> orders) {
+		super();
+		this.id = id;
+		this.capacity = capacity;
+		this.lang = lang;
+		this.latitude = latitude;
+		this.products = products;
+		this.orders = orders;
+	}
+
+	public Van() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Id
     @GeneratedValue
     public int getId() {
         return id;

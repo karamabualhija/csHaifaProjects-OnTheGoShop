@@ -16,7 +16,7 @@ public class UserBL {
     UserRepository userRepository;
 
     public boolean register(User user){
-        List<User> users = userRepository.findBySys_id(user.getSys_id());
+       User users = userRepository.findById(user.getId());
         if (users == null){
             userRepository.save(user);
             return true;
@@ -25,7 +25,7 @@ public class UserBL {
     }
 
 	public ArrayList<Order> finduserorders(int sys_id) {
-		return (ArrayList<Order>) userRepository.findBySys_id(sys_id).get(0).getOrders();
+		return (ArrayList<Order>) userRepository.findById(sys_id).getOrders();
 	}
 
 	public ArrayList<Order> finduserorders(String username) {

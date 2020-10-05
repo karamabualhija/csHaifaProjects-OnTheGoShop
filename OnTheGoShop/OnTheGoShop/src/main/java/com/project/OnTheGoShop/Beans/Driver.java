@@ -13,8 +13,17 @@ public class Driver extends Person {
 
     Van van;
     
-    public Driver(Van van,String name, String username, String password, String phonenumber) {
-		super( name,  username,  password,  phonenumber);
+    public Driver() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public Driver(Van van,String name, String username, String password, String phonenumber) {
+		this.name=name;
+		this.username=username;
+		this.password=password;
+		this.phonenumber=phonenumber;
 		this.van = van;
 	}
 
@@ -34,6 +43,7 @@ public class Driver extends Person {
 		   jo.put("Phonenumbe", this.getPhonenumber());
 		   jo.put("name", this.name);
 		   jo.put("vannum", this.van.getId());
+		   jo.put("username", this.getUsername());
 
 		   return jo;
 	}

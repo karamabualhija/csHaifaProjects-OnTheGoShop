@@ -27,23 +27,15 @@ public class UserController {
 	UserBL userBL;
 	
 	@GetMapping("login")
-	boolean Login(@RequestParam String username,@RequestParam String password, HttpSession session)
+	Person Login(@RequestParam String username,@RequestParam String password, HttpSession session)
 	{
-		/*
-		in the httpSession
-		type 
-		username
-		name
-		phoneNumber
-		vanNum **
-		*/
 		Person res= personBL.LogIn(username, password);
 		   if(res!=null)
 		   {
 			   res.updatesession(session);
-			   return true;	   }
+			   return res;	   }
 		   else
-			    return false;
+			    return res;
 	}
 	/*@GetMapping("updatePassword")
 	void updatePassword(@RequestParam int user_id,@RequestParam String Password)

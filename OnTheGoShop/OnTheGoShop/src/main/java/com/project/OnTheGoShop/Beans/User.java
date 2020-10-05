@@ -15,8 +15,27 @@ public class User extends Person {
     double lan;
     double lat;
     String cardNum;
+    
 
-    @OneToMany
+    public User(List<Order> orders, double lan, double lat, String cardNum) {
+		super();
+		Orders = orders;
+		this.lan = lan;
+		this.lat = lat;
+		this.cardNum = cardNum;
+	}
+
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public void setOrders(List<Order> orders) {
+		Orders = orders;
+	}
+
+	@OneToMany
     public List<Order> getOrders() {
 
         return Orders;

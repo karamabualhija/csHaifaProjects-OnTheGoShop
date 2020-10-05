@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 public interface UserRepository extends PersonRepository<User> ,CrudRepository<User, Integer> {
-    List<User> findBySys_id(int id);
+    User findById(int id);
     User findByUsername(String username);
     ArrayList<User> findAll();
 
