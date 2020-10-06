@@ -33,7 +33,11 @@ public class OrderController {
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size()&&res.get(i).isPending();i++)
 	    {
-	    	jsonArray.add(res.get(i).toJson1());
+	    		int id=res.get(i).getId();
+			   JSONObject jo = new JSONObject();
+			   jo.put("id", id);
+			   jo.put("price",orderbl.findprice(id) );
+			   jsonArray.add(jo);
 	    }
 	    return jsonArray;
 		
@@ -47,7 +51,11 @@ public class OrderController {
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size()&&!(res.get(i).isPending());i++)
 	    {
-	    	jsonArray.add(res.get(i).toJson1());
+	    	int id=res.get(i).getId();
+		   JSONObject jo = new JSONObject();
+		   jo.put("id", id);
+		   jo.put("price",orderbl.findprice(id) );
+		   jsonArray.add(jo);
 	    }
 	    return jsonArray;
 	}
@@ -59,7 +67,11 @@ public class OrderController {
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size()&&!(res.get(i).isPending());i++)
 	    {
-	    	jsonArray.add(res.get(i).toJson1());
+    		int id=res.get(i).getId();
+		   JSONObject jo = new JSONObject();
+		   jo.put("id", id);
+		   jo.put("price",orderbl.findprice(id) );
+		   jsonArray.add(jo);
 	    }
 	    return jsonArray;
 	}
@@ -72,7 +84,11 @@ public class OrderController {
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size()&&!(res.get(i).isPending());i++)
 	    {
-	    	jsonArray.add(res.get(i).toJson1());
+    		int id=res.get(i).getId();
+		   JSONObject jo = new JSONObject();
+		   jo.put("id", id);
+		   jo.put("price",orderbl.findprice(id) );
+		   jsonArray.add(jo);;
 	    }
 	    return jsonArray;
 	}

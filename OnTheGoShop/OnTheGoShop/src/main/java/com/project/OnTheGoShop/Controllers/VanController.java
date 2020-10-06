@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.OnTheGoShop.BL.OrderBL;
 import com.project.OnTheGoShop.BL.VanBL;
 import com.project.OnTheGoShop.Beans.Order;
 import com.project.OnTheGoShop.Beans.Product;
@@ -19,11 +20,13 @@ public class VanController {
 	@Autowired
 	VanBL vanbl;
 
+	@Autowired
+	OrderBL orderbl;
+
 	@SuppressWarnings("unchecked")
 	@GetMapping("AllVans")
 	JSONArray getAllVans()
 	{	/* all vans: id
-		number
 		capacity*/
 		ArrayList<Van> res=vanbl.findallvans();
 	    JSONArray jsonArray = new JSONArray();
@@ -56,6 +59,7 @@ public class VanController {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@GetMapping("getVanOrdere")
 	JSONArray getVanOrdere(HttpSession session)
 	{
@@ -69,16 +73,27 @@ public class VanController {
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<orders.size();i++)
 	    {
-	    	jsonArray.add(orders.get(i).toJson1());
+	    	int orid=orders.get(i).getId();
+		   JSONObject jo = new JSONObject();
+		   jo.put("id", orid);
+		   jo.put("price",orderbl.findprice(id) );
+		   jsonArray.add(jo);
 	    }
 	    return jsonArray;
 		
 	}
-	/*@GetMapping("getVanLocatoin")
-	Location getVanLocatoin(int van_id)
-	{
+	@SuppressWarnings("unchecked")
+	@GetMapping("getVanLocatoin")
+	JSONObject getVanLocatoin(int van_id)
+	{	   
+	   Van v=vanbl.findvan(van_id);
+	   JSONObject jo = new JSONObject();
+	   jo.put("Lang", v.getLang());
+	   jo.put("Latitude",v.getLatitude());
+	   return jo;
+
 		
-	}*/
+	}
 
 	
 

@@ -17,19 +17,27 @@ public class User extends Person {
     String cardNum;
     
 
-    public User(List<Order> orders, double lan, double lat, String cardNum) {
-		super();
-		Orders = orders;
-		this.lan = lan;
-		this.lat = lat;
-		this.cardNum = cardNum;
-	}
+//    public User(List<Order> orders, double lan, double lat, String cardNum) {
+//		super();
+//		Orders = orders;
+//		this.lan = lan;
+//		this.lat = lat;
+//		this.cardNum = cardNum;
+//	}
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public User(String name, String username, String password, String phonenumber) {
+		super();
+		this.name=name;
+		this.username=username;
+		this.phonenumber=phonenumber;
+		this.password=hashPassword(password);
+	}
 
 	public void setOrders(List<Order> orders) {
 		Orders = orders;
