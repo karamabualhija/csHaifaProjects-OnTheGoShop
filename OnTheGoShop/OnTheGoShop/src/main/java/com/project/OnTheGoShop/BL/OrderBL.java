@@ -54,5 +54,9 @@ public class OrderBL {
 	    return sum;
 
 	}
+
+	public Order fondorder(int orders_id) {
+	return orderRepository.findById(orders_id);
+	}
 	
 }

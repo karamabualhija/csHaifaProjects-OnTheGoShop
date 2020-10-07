@@ -8,6 +8,8 @@ import javax.persistence.*;
 public class Order {
 
     int id;
+    String lan;
+    String lat;
 //    List<order_product> products;
 //    float totalPrice;
     boolean Pending;
@@ -30,6 +32,27 @@ public class Order {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Column
+    public String getLan() {
+		return lan;
+	}
+
+
+	public void setLan(String lan) {
+		this.lan = lan;
+	}
+
+	@Column
+	public String getLat() {
+		return lat;
+	}
+
+
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+
 
 //    @ManyToMany
 //    public List<order_product> getProducts() {

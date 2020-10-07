@@ -7,6 +7,7 @@ import org.json.simple.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.OnTheGoShop.BL.OrderBL;
@@ -38,14 +39,14 @@ public class VanController {
 	}
 	@SuppressWarnings("unchecked")
 	@GetMapping("getVanStorage")
-	JSONArray getVanStorage(HttpSession session)
+	JSONArray getVanStorage(@RequestParam int id)
 	{	/*
 		products that is in the van
 		id 
 		name 
 		amount 
 		*/
-		int id=(int) session.getAttribute("id");
+//		int id=(int) session.getAttribute("id");
 		Van res=vanbl.findvan(id);
 		ArrayList<Product> products=(ArrayList<Product>) res.getProducts();
 	    JSONArray jsonArray = new JSONArray();
@@ -60,7 +61,7 @@ public class VanController {
 	}
 
 	@SuppressWarnings("unchecked")
-	@GetMapping("getVanOrdere")
+	@GetMapping("getVanOrders")
 	JSONArray getVanOrdere(HttpSession session)
 	{
 		/*
@@ -84,7 +85,7 @@ public class VanController {
 	}
 	@SuppressWarnings("unchecked")
 	@GetMapping("getVanLocatoin")
-	JSONObject getVanLocatoin(int van_id)
+	JSONObject getVanLocatoin(@RequestParam int van_id)
 	{	   
 	   Van v=vanbl.findvan(van_id);
 	   JSONObject jo = new JSONObject();
@@ -93,6 +94,12 @@ public class VanController {
 	   return jo;
 
 		
+	}
+	@GetMapping("updatelocation")
+	void updatelocation(@RequestParam String lan,@RequestParam String lag,@RequestParam int id)
+	{	   
+	  vanbl.updatelocation(lag,lan,id);
+	 		
 	}
 
 	

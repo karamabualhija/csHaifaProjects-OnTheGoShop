@@ -12,8 +12,6 @@ import java.util.List;
 @Entity
 public class User extends Person {
     List<Order> Orders;
-    double lan;
-    double lat;
     String cardNum;
     
 
@@ -54,23 +52,23 @@ public class User extends Person {
     }
 
 
-    @Column
-    public double getLan() {
-        return lan;
-    }
-
-    public void setLan(double lan) {
-        this.lan = lan;
-    }
-
-    @Column
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
+//    @Column
+//    public double getLan() {
+//        return lan;
+//    }
+//
+//    public void setLan(double lan) {
+//        this.lan = lan;
+//    }
+//
+//    @Column
+//    public double getLat() {
+//        return lat;
+//    }
+//
+//    public void setLat(double lat) {
+//        this.lat = lat;
+//    }
 
     @Column
     public String getCardNum() {
