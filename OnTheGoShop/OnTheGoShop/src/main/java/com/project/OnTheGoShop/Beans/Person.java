@@ -5,6 +5,8 @@ import java.security.MessageDigest;
 import javax.persistence.*;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+
 @Entity(name = "users")
 @Table(uniqueConstraints =  @UniqueConstraint(columnNames = { "username" }))
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -104,6 +106,12 @@ public abstract class Person {
 	    } catch(Exception ex){
 	       throw new RuntimeException(ex);
 	    }
+	}
+
+
+	public JSONObject toJson() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

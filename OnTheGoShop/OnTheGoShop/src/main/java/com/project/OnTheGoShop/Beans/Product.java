@@ -16,7 +16,12 @@ public class Product {
     float price;
     String img;
     
-    public Product(String name, double amount, float price) {
+    public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Product(String name, double amount, float price) {
 		super();
 		this.name = name;
 		this.amount = amount;
