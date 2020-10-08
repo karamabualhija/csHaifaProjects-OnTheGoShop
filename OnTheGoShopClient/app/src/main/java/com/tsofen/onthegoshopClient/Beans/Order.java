@@ -1,8 +1,9 @@
 package com.tsofen.onthegoshopClient.Beans;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
 
     int id;
     List<Product> products;
