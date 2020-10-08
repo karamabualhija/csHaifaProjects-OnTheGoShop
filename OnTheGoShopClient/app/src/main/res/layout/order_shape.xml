@@ -39,7 +39,7 @@
             android:layout_height="50dp"
             android:id="@+id/orderdetailsButton"
             android:text="@string/details"
-            android:onClick="viewdetails"/>
+            android:onClick="orderDetails"/>
 
 
     </LinearLayout>

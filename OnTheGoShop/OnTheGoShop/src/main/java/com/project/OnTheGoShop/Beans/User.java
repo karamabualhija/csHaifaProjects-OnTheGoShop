@@ -87,15 +87,14 @@ public class User extends Person {
 		   session.setAttribute("type", "user");
 		
 	}
-
+	@Override
 	public JSONObject toJson()
 	{
 		   JSONObject jo = new JSONObject();
 		   jo.put("name", this.name);
 		   jo.put("username", this.username);
 		   jo.put("phone", this.phonenumber);
-
-		   
+		   jo.put("type", "User");
 		   return jo;
 	}
 }

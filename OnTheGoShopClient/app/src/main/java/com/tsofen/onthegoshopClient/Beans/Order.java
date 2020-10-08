@@ -1,5 +1,7 @@
 package com.tsofen.onthegoshopClient.Beans;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,7 +10,7 @@ public class Order implements Serializable {
     int id;
     List<Product> products;
     float totalPrice;
-
+    LatLng latLng;
 
     public int getId() {
         return id;
@@ -34,5 +36,11 @@ public class Order implements Serializable {
         this.totalPrice = totalPrice;
     }
 
+    public LatLng getLatLng() {
+        return latLng;
+    }
 
+    public void setLatLng(LatLng latLng) {
+        this.latLng = latLng;
+    }
 }

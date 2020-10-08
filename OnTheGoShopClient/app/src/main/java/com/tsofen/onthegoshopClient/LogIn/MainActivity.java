@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         editor.putString("username", user.getUsername());
                         editor.putString("name", user.getName());
                         editor.putString("phone", user.getPhonenumber());
+                        editor.putString("userType", "user");
                         editor.putBoolean("loggedIn", true);
                         editor.apply();
                         Intent intent = new Intent(MainActivity.this, UserMainView.class);
@@ -144,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToRegister(View view) {
         Intent intent = new Intent(this, register.class);
-        finishAffinity();
         startActivity(intent);
     }
 

@@ -7,6 +7,15 @@ public class Driver {
     String name;
     String phonenumber;
     ArrayList<Order> orders;
+    String vanNum;
+
+    public String getVanNum() {
+        return vanNum;
+    }
+
+    public void setVanNum(String vanNum) {
+        this.vanNum = vanNum;
+    }
 
     public ArrayList<Order> getOrders() {
         return orders;

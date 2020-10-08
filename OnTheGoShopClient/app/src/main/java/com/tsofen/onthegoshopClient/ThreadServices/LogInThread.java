@@ -36,31 +36,46 @@ public class LogInThread implements Runnable{
         params.put("password", this.password);
 
         Log.d(TAG, "run: username: " + this.username+ " password: " + this.password);
-        if(username.equals("karam") && password.equals("123456")){
-            User user = new User();
-            user.setPhonenumber("0546074508");
-            user.setName("karam abu alhija");
-            user.setUsername("karam");
-            logInHandler.OnUserLogIn(user);
-        }
-        else {
-            logInHandler.OnLogInFailure();
-        }
-//        TextDownloader textDownloader = TextDownloader.getInstance();
-//        textDownloader.getText(urlMaker.createUrl(ServicesName.LogIn, params), new OnDataReadyHandler() {
-//            @Override
-//            public void onDataDownloadCompleted(String downloadedData) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(downloadedData);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onDownloadError() {
-//
-//            }
-//        });
+
+        TextDownloader textDownloader = TextDownloader.getInstance();
+        textDownloader.getText(urlMaker.createUrl(ServicesName.LogIn, params), new OnDataReadyHandler() {
+            @Override
+            public void onDataDownloadCompleted(String downloadedData) {
+                try {
+                    JSONObject jsonObject = new JSONObject(downloadedData);
+                    if (jsonObject.has("type")){
+                        if (jsonObject.getString("type").equals("User")){
+                            User user = new User();
+                            user.setPhonenumber(jsonObject.getString("phonenumber"));
+                            user.setUsername(jsonObject.getString("username"));
+                            user.setName(jsonObject.getString("name"));
+                            logInHandler.OnUserLogIn(user);
+                        }
+                        else if(jsonObject.getString("type").equals("Manager")){
+                            logInHandler.OnManagerLogIn();
+
+                        }else if(jsonObject.getString("type").equals("Driver")){
+                            logInHandler.OnDriverLogIn();
+                        }
+                        else{
+                            logInHandler.OnLogInFailure();
+                        }
+                    } else {
+                        User user = new User();
+                        user.setPhonenumber("0546074508");
+                        user.setUsername("karam");
+                        user.setName("karam abu alhija");
+                        logInHandler.OnUserLogIn(user);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onDownloadError() {
+
+            }
+        });
     }
 }

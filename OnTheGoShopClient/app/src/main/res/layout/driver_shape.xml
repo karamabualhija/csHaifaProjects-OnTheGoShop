@@ -19,30 +19,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/DriverName"
-                android:layout_weight="1">
-
-            </TextView>
+                android:layout_weight="1"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/DriverPhone"
                 android:layout_weight="1"
-                >
-
-            </TextView>
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/DriverVanNum"
+                android:layout_weight="1"
+                />
 
 
         </LinearLayout>
-<!--        <Button-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_gravity="center||right"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:id="@+id/DriverOrdersButton"-->
-<!--            android:text="Orders"-->
-<!--            android:onClick="orders"-->
-
-
-<!--            ></Button>-->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_gravity="center|end"
+            android:layout_height="50dp"
+            android:id="@+id/DriverOrdersButton"
+            android:text="Orders"
+            />
 
 
     </LinearLayout>
