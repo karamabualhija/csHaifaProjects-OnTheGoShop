@@ -27,9 +27,12 @@ public class DriverController {
 	String RegisterDriver(@RequestParam String name,@RequestParam String phonenumber,@RequestParam String username,@RequestParam String password,@RequestParam int vanNum)
 	{
 		Van van=vanbl.findvan(vanNum);
+		Driver d1=driverbl.findbuusername(username);
+		if(d1!=null)
+			return "please change the username and try again";
 		Driver d=new Driver( van, name,  username,  password,  phonenumber);
 		driverbl.add(d);
-		return"";
+		return"success";
 	}
 	@SuppressWarnings("unchecked")
 	@GetMapping("getAllDrivers")

@@ -61,12 +61,14 @@ public class Driver extends Person {
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public JSONObject toJson() {
 		   JSONObject jo = new JSONObject();
 		   jo.put("Phonenumbe", this.getPhonenumber());
 		   jo.put("name", this.name);
 		   jo.put("vannum", this.van.getId());
 		   jo.put("username", this.getUsername());
+		   jo.put("type", "Driver");
 
 		   return jo;
 	}

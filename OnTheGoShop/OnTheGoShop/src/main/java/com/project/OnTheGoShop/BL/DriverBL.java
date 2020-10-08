@@ -23,4 +23,8 @@ public class DriverBL {
 		driverrepo.save(d);
 	}
 
+	public Driver findbuusername(String username) {
+		return driverrepo.findByUsername(username);
+	}
+
 }

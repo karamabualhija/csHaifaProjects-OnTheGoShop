@@ -40,5 +40,9 @@ public class UserBL {
 		userRepository.save(d);
 	}
 
+	public User findbyusername(String username) {
+		return userRepository.findByUsername(username);
+	}
+
 
 }

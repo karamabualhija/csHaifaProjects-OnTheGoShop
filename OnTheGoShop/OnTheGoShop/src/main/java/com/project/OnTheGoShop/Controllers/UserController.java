@@ -26,21 +26,22 @@ public class UserController {
 	UserBL userBL;
 	
 	@GetMapping("login")
-	Person Login(@RequestParam String username,@RequestParam String password, HttpSession session)
+	JSONObject Login(@RequestParam String username,@RequestParam String password, HttpSession session)
 	{
 		Person res= personBL.LogIn(username, password);
 		   if(res!=null)
 		   {
 			   res.updatesession(session);
-			   return res;	   }
+			   return res.toJson();	   }
 		   else
-			    return res;
+			    return null;
 	}
 	/*@GetMapping("updatePassword")
 	void updatePassword(@RequestParam int user_id,@RequestParam String Password)
 	{
 		
 	}*/
+	@SuppressWarnings("unchecked")
 	@GetMapping("AllUsers")
 	JSONArray getAllUsers()
 	{
@@ -69,10 +70,12 @@ public class UserController {
 
 	@GetMapping("Register")
 	String Register(@RequestParam String name,@RequestParam String phonenumber,@RequestParam String username,@RequestParam String password) {
-
+		User d1=userBL.findbyusername(username);
+		if(d1!=null)
+			return "please chane your usernaem and try again!!";
 		User d=new User( name,  username,  password,  phonenumber);
 		userBL.add(d);
-		return "";
+		return "success";
 	}
 
 
