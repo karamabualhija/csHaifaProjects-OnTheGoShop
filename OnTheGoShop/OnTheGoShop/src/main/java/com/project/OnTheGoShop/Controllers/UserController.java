@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.OnTheGoShop.Beans.Driver;
 import com.project.OnTheGoShop.Beans.Person;
 import com.project.OnTheGoShop.Beans.User;
-
-
+import com.project.OnTheGoShop.Beans.Van;
 import com.project.OnTheGoShop.BL.PersonBL;
 import com.project.OnTheGoShop.BL.UserBL;
 @RestController
@@ -68,21 +67,25 @@ public class UserController {
 		
 	}
 
-/*	@GetMapping("Register")
-	String Register(String name,String phone,String username,String password,String confirmPass)
-	{
-		
+	@GetMapping("Register")
+	String Register(@RequestParam String name,@RequestParam String phonenumber,@RequestParam String username,@RequestParam String password) {
+
+		User d=new User( name,  username,  password,  phonenumber);
+		userBL.add(d);
+		return "";
 	}
+
+
 	
-	@GetMapping("getInfo")
-	void getInfo(HttpSession session)
-	{/*
-		name
-		phone
-		username
-		sys_id
-		*
-		
-	}*/
+//	@GetMapping("getInfo")
+//	void getInfo(HttpSession session)
+//	{/*
+//		name
+//		phone
+//		username
+//		sys_id
+//		*
+//		
+//	}
 
 }

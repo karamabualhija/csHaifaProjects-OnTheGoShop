@@ -24,6 +24,14 @@ public class OrderController {
 	@Autowired
 	UserBL userbl;
 	
+//	@GetMapping("placeOrder")
+//	void place()
+//	{
+//		orderbl.placeorder();
+////		
+//		
+//	}
+	
 	@SuppressWarnings("unchecked")
 	@GetMapping("ActiveOrders")
 	JSONArray getActiveOrders(HttpSession session)
@@ -33,7 +41,15 @@ public class OrderController {
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size()&&res.get(i).isPending();i++)
 	    {
-	    	jsonArray.add(res.get(i).toJson1());
+    		int id=res.get(i).getId();
+    		String lan=res.get(i).getLan();
+    		String lat=res.get(i).getLat();    		
+		   JSONObject jo = new JSONObject();
+		   jo.put("id", id);
+		   jo.put("lan", lan);
+		   jo.put("lat", lat);
+		   jo.put("price",orderbl.findprice(id) );
+		   jsonArray.add(jo);
 	    }
 	    return jsonArray;
 		
@@ -47,7 +63,15 @@ public class OrderController {
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size()&&!(res.get(i).isPending());i++)
 	    {
-	    	jsonArray.add(res.get(i).toJson1());
+    		int id=res.get(i).getId();
+    		String lan=res.get(i).getLan();
+    		String lat=res.get(i).getLat();    		
+		   JSONObject jo = new JSONObject();
+		   jo.put("id", id);
+		   jo.put("lan", lan);
+		   jo.put("lat", lat);
+		   jo.put("price",orderbl.findprice(id) );
+		   jsonArray.add(jo);
 	    }
 	    return jsonArray;
 	}
@@ -59,7 +83,15 @@ public class OrderController {
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size()&&!(res.get(i).isPending());i++)
 	    {
-	    	jsonArray.add(res.get(i).toJson1());
+    		int id=res.get(i).getId();
+    		String lan=res.get(i).getLan();
+    		String lat=res.get(i).getLat();    		
+		   JSONObject jo = new JSONObject();
+		   jo.put("id", id);
+		   jo.put("lan", lan);
+		   jo.put("lat", lat);
+		   jo.put("price",orderbl.findprice(id) );
+		   jsonArray.add(jo);
 	    }
 	    return jsonArray;
 	}
@@ -72,7 +104,15 @@ public class OrderController {
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size()&&!(res.get(i).isPending());i++)
 	    {
-	    	jsonArray.add(res.get(i).toJson1());
+    		int id=res.get(i).getId();
+    		String lan=res.get(i).getLan();
+    		String lat=res.get(i).getLat();    		
+		   JSONObject jo = new JSONObject();
+		   jo.put("id", id);
+		   jo.put("lan", lan);
+		   jo.put("lat", lat);
+		   jo.put("price",orderbl.findprice(id) );
+		   jsonArray.add(jo);
 	    }
 	    return jsonArray;
 	}
@@ -88,6 +128,20 @@ public class OrderController {
 	{	
 
 	   return orderbl.findprice(orders_id);
+
+	}
+   @SuppressWarnings("unchecked")
+   @GetMapping("OrderLocation")
+	JSONObject getlocation(@RequestParam int orders_id)
+	{	
+
+		Order res=orderbl.fondorder(orders_id);
+		String lan=res.getLan();
+		String lat=res.getLat();    		
+	   JSONObject jo = new JSONObject();
+	   jo.put("lan", lan);
+	   jo.put("lat", lat);
+	   return jo;
 
 	}
 

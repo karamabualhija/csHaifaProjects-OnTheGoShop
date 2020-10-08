@@ -1,5 +1,6 @@
 package com.project.OnTheGoShop.Beans;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -12,8 +13,30 @@ import org.json.simple.JSONObject;
 public class Driver extends Person {
 
     Van van;
-    
-    public Driver() {
+//    String lan;
+//    String lat;
+//    @Column
+//    public String getLan() {
+//		return lan;
+//	}
+//
+//
+//	public void setLan(String lan) {
+//		this.lan = lan;
+//	}
+//
+//	@Column
+//	public String getLat() {
+//		return lat;
+//	}
+//
+//
+//	public void setLat(String lat) {
+//		this.lat = lat;
+//	}
+
+
+	public Driver() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
