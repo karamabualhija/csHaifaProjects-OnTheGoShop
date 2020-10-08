@@ -36,5 +36,9 @@ public class UserBL {
 
 	}
 
+	public void add(User d) {
+		userRepository.save(d);
+	}
+
 
 }

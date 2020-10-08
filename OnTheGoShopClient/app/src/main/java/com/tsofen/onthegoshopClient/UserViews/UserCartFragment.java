@@ -1,5 +1,6 @@
 package com.tsofen.onthegoshopClient.UserViews;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 
 import com.tsofen.onthegoshopClient.Adapters.Cart_ProductAdapter;
+import com.tsofen.onthegoshopClient.Beans.Order;
 import com.tsofen.onthegoshopClient.Beans.Product;
 import com.tsofen.onthegoshopClient.DBHandler.CartDBHandler;
 import com.tsofen.onthegoshopClient.R;
@@ -49,6 +51,11 @@ public class UserCartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 products = (ArrayList<Product>) dbHandler.getProducts();
+                Order order = new Order();
+                order.setProducts(products);
+                Intent intent = new Intent(getContext(), OrderMapActivity.class);
+                intent.putExtra("newOrder", order);
+                startActivity(intent);
                 //TODO send to the server the order data
                 dbHandler.deleteProducts();
                 //TODO set the cart num to 0

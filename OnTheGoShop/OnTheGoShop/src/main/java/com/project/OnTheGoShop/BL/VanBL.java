@@ -20,6 +20,10 @@ public class VanBL {
 	public Van findvan(int id) {
 		return vanRepository.findById(id);
 	}
+
+	public void updatelocation(String lag, String lan, int id) {
+		vanRepository.Updatelocation(id, lan, lag);		
+	}
 	
 
 }

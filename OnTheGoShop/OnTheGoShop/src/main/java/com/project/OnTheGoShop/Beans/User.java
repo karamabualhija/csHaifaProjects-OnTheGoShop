@@ -12,24 +12,30 @@ import java.util.List;
 @Entity
 public class User extends Person {
     List<Order> Orders;
-    double lan;
-    double lat;
     String cardNum;
     
 
-    public User(List<Order> orders, double lan, double lat, String cardNum) {
-		super();
-		Orders = orders;
-		this.lan = lan;
-		this.lat = lat;
-		this.cardNum = cardNum;
-	}
+//    public User(List<Order> orders, double lan, double lat, String cardNum) {
+//		super();
+//		Orders = orders;
+//		this.lan = lan;
+//		this.lat = lat;
+//		this.cardNum = cardNum;
+//	}
 
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public User(String name, String username, String password, String phonenumber) {
+		super();
+		this.name=name;
+		this.username=username;
+		this.phonenumber=phonenumber;
+		this.password=hashPassword(password);
+	}
 
 	public void setOrders(List<Order> orders) {
 		Orders = orders;
@@ -46,23 +52,23 @@ public class User extends Person {
     }
 
 
-    @Column
-    public double getLan() {
-        return lan;
-    }
-
-    public void setLan(double lan) {
-        this.lan = lan;
-    }
-
-    @Column
-    public double getLat() {
-        return lat;
-    }
-
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
+//    @Column
+//    public double getLan() {
+//        return lan;
+//    }
+//
+//    public void setLan(double lan) {
+//        this.lan = lan;
+//    }
+//
+//    @Column
+//    public double getLat() {
+//        return lat;
+//    }
+//
+//    public void setLat(double lat) {
+//        this.lat = lat;
+//    }
 
     @Column
     public String getCardNum() {
