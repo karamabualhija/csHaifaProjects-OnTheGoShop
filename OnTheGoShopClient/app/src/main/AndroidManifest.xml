@@ -26,7 +26,7 @@
         <activity android:name=".ManagerViews.ManagerStorage" />
         <activity android:name=".ManagerViews.ManagerUsers" />
         <activity android:name=".ManagerViews.ManagerVans" />
-        <activity android:name=".ManagerViews.newProduct" />
+        <activity android:name=".ManagerViews.NewProduct" />
         <activity android:name=".ManagerViews.NewDriver" />
         <activity android:name=".Register.register" />
         <activity android:name=".LogIn.MainActivity">

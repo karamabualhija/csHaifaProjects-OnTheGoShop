@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class UrlMaker {
     private static final String TAG = "UrlMaker";
-    private static final String baseUrl = "https://localhost:8080/";
+    private static final String baseUrl = "http://10.0.2.2:8080/";
     public String createUrl(ServicesName service, Map<String, String> params){
         if (params == null)
             return baseUrl + service.getUrl();
