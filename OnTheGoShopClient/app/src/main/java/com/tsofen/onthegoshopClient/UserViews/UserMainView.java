@@ -84,16 +84,19 @@ public class UserMainView extends AppCompatActivity {
 
     public void deleteProductFromCart(View v){
         LinearLayout linearLayout = (LinearLayout) v.getParent();
-        TextView nameTv = linearLayout.findViewById(R.id.DeleteCartBtn);
+        TextView nameTv = linearLayout.findViewById(R.id.productNameCart);
         String productName = nameTv.getText().toString();
+        Log.d(TAG, "deleteProductFromCart: the product name is: " + productName);
         CartDBHandler dbHandler = new CartDBHandler(this, null, 1);
         dbHandler.deleteProduct(productName);
         CartListAdapters cartListAdapters = CartListAdapters.getInstance();
         ArrayList<Product> products = cartListAdapters.getProducts();
         for (Product pro:
              products) {
-            if (pro.getName().equals(productName))
+            if (pro.getName().equals(productName)) {
+                Log.d(TAG, "deleteProductFromCart: i have found the product");
                 products.remove(pro);
+            }
         }
         cartListAdapters.getCartAdapter().notifyDataSetChanged();
         //TODO update the num on cart

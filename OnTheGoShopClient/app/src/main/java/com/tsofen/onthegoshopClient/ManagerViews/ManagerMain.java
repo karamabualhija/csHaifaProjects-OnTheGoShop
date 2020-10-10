@@ -27,7 +27,7 @@ public class ManagerMain extends AppCompatActivity {
         startActivity(intent);
     }
     public void setDrivers(View view) {
-        Intent intent = new Intent(this, ManagerStorage.class);
+        Intent intent = new Intent(this, ManagerDrivers.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
@@ -36,11 +36,11 @@ public class ManagerMain extends AppCompatActivity {
         startActivity(intent);
     }
     public void setUsers(View view) {
-        Intent intent = new Intent(this, ManagerStorage.class);
+        Intent intent = new Intent(this, ManagerUsers.class);
         startActivity(intent);
     }
     public void setOrders(View view) {
-        Intent intent = new Intent(this, ManagerStorage.class);
+        Intent intent = new Intent(this, ManagerOrders.class);
         startActivity(intent);
     }
 

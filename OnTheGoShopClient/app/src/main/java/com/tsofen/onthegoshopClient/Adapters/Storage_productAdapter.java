@@ -34,7 +34,7 @@ public class Storage_productAdapter extends ArrayAdapter<Product> {
         proname.setText(pro.getName());
         proprice.setText(Float.toString(pro.getPrice()));
         proamount.setText(Double.toString(pro.getAmount()));
-        proid.setText(pro.getId());
+        proid.setText(String.valueOf(pro.getId()));
         return layout;
 
     }

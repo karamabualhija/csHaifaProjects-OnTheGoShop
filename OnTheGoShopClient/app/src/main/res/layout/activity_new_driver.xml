@@ -84,5 +84,6 @@
         android:background="@drawable/roundedbuttonblue"
         android:textColor="@color/white"
         android:text="@string/add_driver"
+        android:onClick="addNewDriver"
         />
 </RelativeLayout>

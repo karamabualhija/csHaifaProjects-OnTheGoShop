@@ -42,4 +42,8 @@
     <string name="details">details</string>
     <string name="total_price">Total Price:</string>
     <string name="maps_api_key">AIzaSyAKniSH0MaJOvFufHLPVO93q1IaNceypMU</string>
+    <string name="driver_info">Driver Info</string>
+    <string name="driver_location">Driver location:</string>
+    <string name="product_in_the_van">Product in the van:</string>
+    <string name="drivers_orders">Drivers orders:</string>
 </resources>

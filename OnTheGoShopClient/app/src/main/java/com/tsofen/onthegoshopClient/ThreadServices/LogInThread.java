@@ -3,6 +3,7 @@ package com.tsofen.onthegoshopClient.ThreadServices;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.tsofen.onthegoshopClient.Beans.Manager;
 import com.tsofen.onthegoshopClient.Beans.User;
 import com.tsofen.onthegoshopClient.DataHandlers.LogInHandler;
 import com.tsofen.onthegoshopClient.DataServices.OnDataReadyHandler;
@@ -46,13 +47,17 @@ public class LogInThread implements Runnable{
                     if (jsonObject.has("type")){
                         if (jsonObject.getString("type").equals("User")){
                             User user = new User();
-                            user.setPhonenumber(jsonObject.getString("phonenumber"));
+                            user.setPhonenumber(jsonObject.getString("phone"));
                             user.setUsername(jsonObject.getString("username"));
                             user.setName(jsonObject.getString("name"));
                             logInHandler.OnUserLogIn(user);
                         }
                         else if(jsonObject.getString("type").equals("Manager")){
-                            logInHandler.OnManagerLogIn();
+                            Manager manager = new Manager();
+                            manager.setPhonenumber(jsonObject.getString("phone"));
+                            manager.setUsername(jsonObject.getString("username"));
+                            manager.setName(jsonObject.getString("name"));
+                            logInHandler.OnManagerLogIn(manager);
 
                         }else if(jsonObject.getString("type").equals("Driver")){
                             logInHandler.OnDriverLogIn();
@@ -61,11 +66,7 @@ public class LogInThread implements Runnable{
                             logInHandler.OnLogInFailure();
                         }
                     } else {
-                        User user = new User();
-                        user.setPhonenumber("0546074508");
-                        user.setUsername("karam");
-                        user.setName("karam abu alhija");
-                        logInHandler.OnUserLogIn(user);
+                        logInHandler.OnLogInFailure();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

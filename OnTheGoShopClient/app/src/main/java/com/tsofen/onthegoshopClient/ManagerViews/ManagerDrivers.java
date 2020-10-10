@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -75,5 +77,13 @@ public class ManagerDrivers extends AppCompatActivity {
         super.onDestroy();
         if (getDriversManagerHandlerThread!=null && getDriversManagerHandlerThread.isAlive())
             getDriversManagerHandlerThread.quit();
+    }
+
+    public void getDriverInfo(View v){
+        LinearLayout linearLayout = (LinearLayout) v.getParent();
+        TextView driverId = linearLayout.findViewById(R.id.DriverVanNum);
+        Intent intent = new Intent(this, MangerDriverDetails.class);
+        intent.putExtra("driverId", driverId.getText().toString());
+        startActivity(intent);
     }
 }

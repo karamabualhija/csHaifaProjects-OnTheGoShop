@@ -6,10 +6,16 @@ public enum ServicesName {
     LogOut("User/logout"),
     AllUsers("User/AllUsers"),
     AllProducts("Product/AllProducts"),
-    ManagerAllProduct("Product/AllProductManger"),
+    AddProduct("Product/AddNewProduct"),
+    ManagerAllProduct("Product/AllProductsManger"),
     AllDrivers("Driver/getAllDrivers"),
+    AddDriver("Driver/RegisterDriver"),
+    DriverLocation("Van/getVanLocatoin"),
+    DriverProduct("Van/getVanStorage"),
+    DriverOrders("Van/getVanOrders"),
     AllOrders("Order/AllOrders"),
     OldOrders("Order/OldOrders"),
+    ActiveOrder("Order/ActiveOrders"),
     OrderDetails("Order/OrderDetails");
 
 
