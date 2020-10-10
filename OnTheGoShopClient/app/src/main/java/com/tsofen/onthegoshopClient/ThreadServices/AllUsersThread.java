@@ -42,8 +42,8 @@ public class AllUsersThread implements Runnable {
                             User user = new User();
                             if (object.has("name"))
                                 user.setName(object.getString("name"));
-                            if (object.has("phonenum"))
-                                user.setPhonenumber(object.getString("phonenum"));
+                            if (object.has("phone"))
+                                user.setPhonenumber(object.getString("phone"));
                             users.add(user);
                         }
                         allUsersHandler.onUserReceived(users);

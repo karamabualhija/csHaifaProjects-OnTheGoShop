@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:weightSum="100"
+    >
+    <TextView
+        android:layout_marginStart="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/productNameDriverDetails"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textAlignment="gravity"
+        android:gravity="start|center_vertical"
+        android:layout_weight="30"
+        />
+    <TextView
+        android:layout_marginStart="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/productAmountDriverDetails"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textAlignment="gravity"
+        android:gravity="start|center_vertical"
+        android:layout_weight="30"
+        />
+    <TextView
+        android:layout_marginStart="150dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/productPriceDriverDetails"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textAlignment="gravity"
+        android:gravity="start|center_vertical"
+        android:layout_weight="30"
+        />
+</LinearLayout>

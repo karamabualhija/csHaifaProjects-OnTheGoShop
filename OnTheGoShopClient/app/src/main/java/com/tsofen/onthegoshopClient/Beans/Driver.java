@@ -8,6 +8,15 @@ public class Driver {
     String phonenumber;
     ArrayList<Order> orders;
     String vanNum;
+    String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getVanNum() {
         return vanNum;

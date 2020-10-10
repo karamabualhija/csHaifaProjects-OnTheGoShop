@@ -60,7 +60,8 @@
             android:background="@drawable/roundedbuttonblue"
             android:textSize="20sp"
             android:textColor="@color/white"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:onClick="addNewProduct"/>
 
     </GridLayout>
 

@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tsofen.onthegoshopClient.Beans.Manager;
 import com.tsofen.onthegoshopClient.Beans.User;
 import com.tsofen.onthegoshopClient.DataHandlers.LogInHandler;
 import com.tsofen.onthegoshopClient.ManagerViews.ManagerMain;
@@ -45,13 +46,22 @@ public class MainActivity extends AppCompatActivity {
             String sharedUsername = sharedPreferences.getString("username", "");
             String sharedPhoneNum = sharedPreferences.getString("phone", "");
             String sharedName = sharedPreferences.getString("name", "");
-            User user = new User();
-            user.setUsername(sharedUsername);
-            user.setName(sharedName);
-            user.setPhonenumber(sharedPhoneNum);
-            Intent intent = new Intent(this, UserMainView.class);
-            finishAffinity();
-            startActivity(intent);
+            String type = sharedPreferences.getString("userType", "");
+            if (type.equals("user")){
+                User user = new User();
+                user.setUsername(sharedUsername);
+                user.setName(sharedName);
+                user.setPhonenumber(sharedPhoneNum);
+                Intent intent = new Intent(this, UserMainView.class);
+                finishAffinity();
+                startActivity(intent);
+            }
+            else if (type.equals("manager")){
+                Intent intent = new Intent(this, ManagerMain.class);
+                finishAffinity();
+                startActivity(intent);
+            }
+
         }
     }
 
@@ -102,8 +112,23 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void OnManagerLogIn() {
-
+            public void OnManagerLogIn(final Manager manager) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", manager.getUsername());
+                        editor.putString("name", manager.getName());
+                        editor.putString("phone", manager.getPhonenumber());
+                        editor.putString("userType", "manager");
+                        editor.putBoolean("loggedIn", true);
+                        editor.apply();
+                        Intent intent = new Intent(MainActivity.this, ManagerMain.class);
+                        finishAffinity();
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override

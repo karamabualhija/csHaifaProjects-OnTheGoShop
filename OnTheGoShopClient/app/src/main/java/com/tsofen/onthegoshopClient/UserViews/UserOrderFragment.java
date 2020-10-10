@@ -50,21 +50,21 @@ public class UserOrderFragment extends Fragment {
         userOrderHandlerThread = new HandlerThread("userOrderHandlerThread");
         userOrderHandlerThread.start();
 
-        orderThread = new UserOrderThread(UserOrderThread.WAITING_ORDERS, new UserOrderHandler() {
-            @Override
-            public void onOrdersReceived(final ArrayList<Order> orders) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ordersToShow = orders;
-                        orderAdapter = new OrderAdapter(getContext(), ordersToShow);
-                        userOrderList.setAdapter(orderAdapter);
-                    }
-                });
-            }
-        });
-        handler = new Handler(userOrderHandlerThread.getLooper());
-        handler.post(orderThread);
+//        orderThread = new UserOrderThread(UserOrderThread.WAITING_ORDERS, new UserOrderHandler() {
+//            @Override
+//            public void onOrdersReceived(final ArrayList<Order> orders) {
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        ordersToShow = orders;
+//                        orderAdapter = new OrderAdapter(getContext(), ordersToShow);
+//                        userOrderList.setAdapter(orderAdapter);
+//                    }
+//                });
+//            }
+//        });
+//        handler = new Handler(userOrderHandlerThread.getLooper());
+//        handler.post(orderThread);
 
         allOrders.setOnClickListener(new View.OnClickListener() {
             @Override

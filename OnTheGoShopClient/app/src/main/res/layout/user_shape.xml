@@ -38,7 +38,8 @@
             android:layout_gravity="center|end"
             android:layout_height="50dp"
             android:id="@+id/OrdersButtonusershape"
-            android:text="Orders"
+            android:text="@string/orders"
+            android:onClick="getUserOrder"
             />
 
 

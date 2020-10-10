@@ -18,6 +18,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/DriverId"
+                android:layout_weight="1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/DriverName"
                 android:layout_weight="1"/>
             <TextView
@@ -40,7 +45,8 @@
             android:layout_gravity="center|end"
             android:layout_height="50dp"
             android:id="@+id/DriverOrdersButton"
-            android:text="Orders"
+            android:text="@string/driver_info"
+            android:onClick="getDriverInfo"
             />
 
 

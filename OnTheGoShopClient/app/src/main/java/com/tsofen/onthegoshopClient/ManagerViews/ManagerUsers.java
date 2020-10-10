@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -68,5 +71,15 @@ public class ManagerUsers extends AppCompatActivity {
         super.onDestroy();
         if (managerUserHandlerThread!=null && managerUserHandlerThread.isAlive())
             managerUserHandlerThread.quit();
+    }
+
+    public void getUserOrder(View v){
+        LinearLayout linearLayout = (LinearLayout) v.getParent();
+        TextView name = linearLayout.findViewById(R.id.UserNameshape);
+
+        //TODO show him the orders of this person
+
+        Log.d(TAG, "getUserOrder: requesting the orders of: " + name.getText().toString());
+
     }
 }
