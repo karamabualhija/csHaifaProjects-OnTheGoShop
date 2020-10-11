@@ -85,7 +85,8 @@ public class User extends Person {
 		   session.setAttribute("username", this.username);
 		   session.setAttribute("phonemumber", this.phonenumber);
 		   session.setAttribute("type", "user");
-		
+		   session.setAttribute("id", this.id);
+	
 	}
 	@Override
 	public JSONObject toJson()
@@ -95,6 +96,11 @@ public class User extends Person {
 		   jo.put("username", this.username);
 		   jo.put("phone", this.phonenumber);
 		   jo.put("type", "User");
+		   jo.put("id", this.id);
+		   
 		   return jo;
+	}
+	public void add_order(Order o) {
+		this.Orders.add(o);
 	}
 }

@@ -91,7 +91,7 @@ public class ProductsController {
 
 	*/
 	@GetMapping("AddNewProduct")
-	void newProduct(@RequestParam String name, @RequestParam Float price,@RequestParam double amount)
+	void newProduct(@RequestParam String name, @RequestParam Float price,@RequestParam int amount)
 	{
 		Product p=new Product( name,  amount,  price) ;
 		productbl.add(p);

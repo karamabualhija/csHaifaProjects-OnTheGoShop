@@ -12,30 +12,30 @@ public class Product {
 
     int id;
     String name;
-    double amount;
+    int amount;
     float price;
-    String img;
+//    String img;
     
     public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String name, double amount, float price) {
+	public Product(String name, int amount, float price) {
 		super();
 		this.name = name;
 		this.amount = amount;
 		this.price = price;
 	}
 
-	@Column
-    public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
-	}
+//	@Column
+//    public String getImg() {
+//		return img;
+//	}
+//
+//	public void setImg(String img) {
+//		this.img = img;
+//	}
 
 	@Id
     @GeneratedValue
@@ -57,11 +57,11 @@ public class Product {
     }
 
     @Column
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
@@ -87,7 +87,7 @@ public class Product {
 	@SuppressWarnings("unchecked")
 	public JSONObject toJson2(int flag) {
 		   JSONObject jo = new JSONObject();
-		   jo.put("img", this.img);
+//		   jo.put("img", this.img);
 		   jo.put("name", this.name);
 		   jo.put("price", this.price);
 		   if(flag==2)

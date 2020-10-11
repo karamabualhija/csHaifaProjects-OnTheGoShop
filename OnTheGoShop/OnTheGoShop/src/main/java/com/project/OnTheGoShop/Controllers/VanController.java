@@ -11,10 +11,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.OnTheGoShop.BL.OrderBL;
+import com.project.OnTheGoShop.BL.ProductBL;
 import com.project.OnTheGoShop.BL.VanBL;
 import com.project.OnTheGoShop.Beans.Order;
 import com.project.OnTheGoShop.Beans.Product;
+import com.project.OnTheGoShop.Beans.Sort;
 import com.project.OnTheGoShop.Beans.Van;
+import com.project.OnTheGoShop.Beans.order_product;
+import com.project.OnTheGoShop.Beans.van_products;
+import com.project.OnTheGoShop.Repo.VanRepository;
+import com.project.OnTheGoShop.Repo.van_prorepository;
 @RestController
 @RequestMapping("Van")
 public class VanController {
@@ -23,6 +29,10 @@ public class VanController {
 
 	@Autowired
 	OrderBL orderbl;
+	@Autowired
+	ProductBL probl;
+	@Autowired
+	van_prorepository vanpr;
 
 	@SuppressWarnings("unchecked")
 	@GetMapping("AllVans")
@@ -47,12 +57,14 @@ public class VanController {
 		amount 
 		*/
 //		int id=(int) session.getAttribute("id");
-		Van res=vanbl.findvan(id);
-		ArrayList<Product> products=(ArrayList<Product>) res.getProducts();
+//		Van res=vanbl.findvan(id);
+		ArrayList<van_products> products=(ArrayList<van_products>) vanpr.findAllByVanid(id);
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<products.size();i++)
 	    {
-	    	jsonArray.add(products.get(i).toJson1());
+	    	int productid=products.get(i).getProductid();
+	    	Product pro=probl.findpro(productid);
+	    	jsonArray.add(pro.toJson1());
 	    }
 	    return jsonArray;
 
@@ -62,13 +74,13 @@ public class VanController {
 
 	@SuppressWarnings("unchecked")
 	@GetMapping("getVanOrders")
-	JSONArray getVanOrdere(HttpSession session)
+	JSONArray getVanOrdere(HttpSession session,@RequestParam int id)
 	{
 		/*
 		orders_id
 		orders_price
 		*/
-		int id=(int) session.getAttribute("id");
+//		int id=(int) session.getAttribute("id");
 		Van res=vanbl.findvan(id);
 		ArrayList<Order> orders=(ArrayList<Order>) res.getOrders();
 	    JSONArray jsonArray = new JSONArray();
@@ -78,6 +90,8 @@ public class VanController {
 		   JSONObject jo = new JSONObject();
 		   jo.put("id", orid);
 		   jo.put("price",orderbl.findprice(id) );
+		   jo.put("lan", orders.get(i).getLan());
+		   jo.put("lat", orders.get(i).getLat());
 		   jsonArray.add(jo);
 	    }
 	    return jsonArray;
@@ -99,7 +113,30 @@ public class VanController {
 	void updatelocation(@RequestParam String lan,@RequestParam String lag,@RequestParam int id)
 	{	   
 	  vanbl.updatelocation(lag,lan,id);
+	  Van v=vanbl.findvan(id);
+	  Sort.Updatedistances((ArrayList<Order>) v.getOrders(),lag,lan);
 	 		
+	}
+	@GetMapping("addtostorage")
+	String addtostorage(@RequestParam int van_id,@RequestParam int pro_id,@RequestParam int amount) {
+		Product pro=probl.findpro(pro_id);
+		int proamount=pro.getAmount();
+		if(proamount<amount)
+			return "there not enough storage";
+		probl.updatestorage(pro_id,proamount-amount);
+		van_products vp=vanpr.findByProductid(pro_id);
+		if(vp==null) {
+		vp= new van_products(van_id,pro_id,amount);
+		vanpr.save(vp);}
+		else {
+			vanpr.updateamount(vp.getId(),vp.getAmount()+amount);
+		}
+		
+		probl.updatestorage(pro_id, proamount-amount);
+		return "successss";
+		
+		
+		
 	}
 
 	

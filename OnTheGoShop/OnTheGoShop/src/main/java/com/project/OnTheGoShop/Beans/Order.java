@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 
 @Entity(name = "Orders")
-public class Order {
+public class  Order implements Comparable<Order> {
 
     int id;
     String lan;
@@ -13,8 +13,45 @@ public class Order {
 //    List<order_product> products;
 //    float totalPrice;
     boolean Pending;
+   double distance;
+   
     
-    @Column
+    
+    public double getDistance() {
+	return distance;
+}
+
+
+
+public void setDistance(double distance) {
+	this.distance = distance;
+}
+
+
+
+	public Order() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+	public Order(int id, String lan, String lat, boolean pending) {
+		super();
+		this.id = id;
+		this.lan = lan;
+		this.lat = lat;
+		Pending = pending;
+	}
+
+	public Order( String lan, String lat) {
+		super();
+		this.lan = lan;
+		this.lat = lat;
+		Pending = true;
+	}
+
+	@Column
     public boolean isPending() {
 		return Pending;
 	}
@@ -52,6 +89,19 @@ public class Order {
 	public void setLat(String lat) {
 		this.lat = lat;
 	}
+
+
+
+	@Override
+	public int compareTo(Order other) {
+	       if(this.getDistance() > other.getDistance())
+	            return 1;
+	        else if (this.getDistance() == other.getDistance())
+	            return 0 ;
+	        return -1 ;
+	}
+
+
 
 
 //    @ManyToMany

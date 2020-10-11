@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.tomcat.util.json.ParseException;
 import org.json.simple.*;
 
 @RestController
@@ -24,13 +25,13 @@ public class OrderController {
 	@Autowired
 	UserBL userbl;
 	
-//	@GetMapping("placeOrder")
-//	void place()
-//	{
-//		orderbl.placeorder();
-////		
-//		
-//	}
+	@GetMapping("placeOrder")
+	String place(@RequestParam String jsonstrinf,@RequestParam int user_id,@RequestParam String lat,@RequestParam String lon) throws ParseException
+	{
+		return orderbl.placeorder(jsonstrinf,user_id,lat,lon);
+		
+		
+	}
 	
 	@SuppressWarnings("unchecked")
 	@GetMapping("ActiveOrders")
@@ -144,5 +145,7 @@ public class OrderController {
 	   return jo;
 
 	}
+
+   
 
 }

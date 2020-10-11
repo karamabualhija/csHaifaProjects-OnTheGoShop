@@ -1,18 +1,25 @@
 package com.project.OnTheGoShop.Beans;
 
+import java.util.ArrayList;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
+
+import net.bytebuddy.asm.Advice.This;
 
 
 @Entity
 public class Driver extends Person {
 
     Van van;
+    
+    
 //    String lan;
 //    String lat;
 //    @Column
@@ -36,16 +43,17 @@ public class Driver extends Person {
 //	}
 
 
+
+
 	public Driver() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public Driver(Van van,String name, String username, String password, String phonenumber) {
 		this.name=name;
 		this.username=username;
-		this.password=password;
+		this.password=hashPassword(password);
 		this.phonenumber=phonenumber;
 		this.van = van;
 	}
@@ -69,6 +77,8 @@ public class Driver extends Person {
 		   jo.put("vannum", this.van.getId());
 		   jo.put("username", this.getUsername());
 		   jo.put("type", "Driver");
+		   jo.put("id", this.id);
+		   
 
 		   return jo;
 	}
@@ -79,6 +89,8 @@ public class Driver extends Person {
 		   session.setAttribute("phonemumber", this.phonenumber);
 		   session.setAttribute("type", "Driver");
 		   session.setAttribute("vannum", this.van.getId());
+		   session.setAttribute("id", this.id);
+			
 		
 	}
 

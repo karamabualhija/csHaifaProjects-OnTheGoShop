@@ -24,6 +24,13 @@ public class VanBL {
 	public void updatelocation(String lag, String lan, int id) {
 		vanRepository.Updatelocation(id, lan, lag);		
 	}
+
+	public void orderreceived(int van_id, int order_id) {
+		
+		Van v=vanRepository.findById(van_id);
+		v.removeorder(order_id);
+		vanRepository.save(v);
+	}
 	
 
 }

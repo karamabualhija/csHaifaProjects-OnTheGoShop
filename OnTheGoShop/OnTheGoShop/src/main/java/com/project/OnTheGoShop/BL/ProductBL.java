@@ -30,6 +30,14 @@ public class ProductBL {
 		productRepository.save(p);
 		
 	}
+
+	public Product findpro(int pro_id) {
+		return productRepository.findById(pro_id);
+	}
+
+	public void updatestorage(int pro_id, int amount) {
+		productRepository.updatestorage(pro_id,  amount)	;	
+	}
 	
 
 }

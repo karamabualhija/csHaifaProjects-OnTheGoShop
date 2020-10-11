@@ -4,26 +4,26 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-@Entity(name = "Order_Product")
-public class order_product {
+@Entity(name = "van_products")
+public class van_products {
 	int id;
-	int orderid;
+	int vanid;
 	int productid;
 	int amount;
-	public order_product(int id, int order_id, int product_id, int amount) {
+	public van_products(int id, int vanid, int product_id, int amount) {
 		super();
 		this.id = id;
-		this.orderid = order_id;
+		this.vanid = vanid;
 		this.productid = product_id;
 		this.amount = amount;
 	}
-	public order_product(int order_id, int product_id, int amount) {
+	public van_products( int vanid, int product_id, int amount) {
 		super();
-		this.orderid = order_id;
+		this.vanid = vanid;
 		this.productid = product_id;
 		this.amount = amount;
 	}
-	public order_product() {
+	public van_products() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,16 +35,18 @@ public class order_product {
 	public void setId(int id) {
 		this.id = id;
 	}
-	@Column
-	public int getOrderid() {
-		return orderid;
-	}
-	public void setOrderid(int orderid) {
-		this.orderid = orderid;
-	}
+	
+
 	@Column
 	public int getProductid() {
 		return productid;
+	}
+	@Column
+	public int getVanid() {
+		return vanid;
+	}
+	public void setVanid(int vanid) {
+		this.vanid = vanid;
 	}
 	public void setProductid(int productid) {
 		this.productid = productid;

@@ -27,4 +27,8 @@ public class DriverBL {
 		return driverrepo.findByUsername(username);
 	}
 
+	public Driver finddriver(int id) {
+		return driverrepo.findById(id);
+	}
+
 }
