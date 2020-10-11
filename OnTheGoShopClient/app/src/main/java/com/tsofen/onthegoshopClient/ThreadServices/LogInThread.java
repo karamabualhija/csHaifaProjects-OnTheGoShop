@@ -3,6 +3,7 @@ package com.tsofen.onthegoshopClient.ThreadServices;
 import android.os.SystemClock;
 import android.util.Log;
 
+import com.tsofen.onthegoshopClient.Beans.Driver;
 import com.tsofen.onthegoshopClient.Beans.Manager;
 import com.tsofen.onthegoshopClient.Beans.User;
 import com.tsofen.onthegoshopClient.DataHandlers.LogInHandler;
@@ -60,7 +61,12 @@ public class LogInThread implements Runnable{
                             logInHandler.OnManagerLogIn(manager);
 
                         }else if(jsonObject.getString("type").equals("Driver")){
-                            logInHandler.OnDriverLogIn();
+                            Driver driver = new Driver();
+                            driver.setName(jsonObject.getString("name"));
+                            driver.setPhonenumber(jsonObject.getString("Phonenumbe"));
+                            driver.setUsername(jsonObject.getString("username"));
+                            driver.setVanNum(String.valueOf(jsonObject.getInt("vanNum")));
+                            logInHandler.OnDriverLogIn(driver);
                         }
                         else{
                             logInHandler.OnLogInFailure();

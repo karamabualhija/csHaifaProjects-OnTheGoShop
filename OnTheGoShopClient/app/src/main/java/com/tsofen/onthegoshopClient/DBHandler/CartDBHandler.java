@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartDBHandler extends SQLiteOpenHelper {
+
+    private static final String TAG = "CartDBHandler";
 
     private static final String DATABASE_NAME = "cart.db";
     private static final String TABLE_NAME = "cart_product";
@@ -77,12 +80,13 @@ public class CartDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
-        if (!cursor.isAfterLast()){
+        while (!cursor.isAfterLast()){
             String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
             float price = cursor.getFloat(cursor.getColumnIndex(COLUMN_PRICE));
             double amount = cursor.getDouble(cursor.getColumnIndex(COLUMN_AMOUNT));
             Product product = new Product(name, amount, price);
             products.add(product);
+            cursor.moveToNext();
         }
         cursor.close();
         return products;

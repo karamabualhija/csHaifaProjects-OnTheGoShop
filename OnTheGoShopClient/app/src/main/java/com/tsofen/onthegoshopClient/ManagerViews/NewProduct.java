@@ -73,6 +73,7 @@ public class NewProduct extends AppCompatActivity {
                     public void run() {
                         Intent intent = new Intent(NewProduct.this, ManagerStorage.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        finishAffinity();
                         startActivity(intent);
                     }
                 });

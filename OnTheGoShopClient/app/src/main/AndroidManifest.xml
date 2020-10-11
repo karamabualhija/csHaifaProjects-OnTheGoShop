@@ -15,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ManagerViews.MangerDriverDetails"></activity>
+        <activity android:name=".DriverViews.DriverNewProduct"></activity>
+        <activity android:name=".DriverViews.DriverNavigate" />
+        <activity android:name=".DriverViews.VanStorage" />
+        <activity android:name=".DriverViews.DriverMain" />
+        <activity android:name=".ManagerViews.MangerDriverDetails" />
         <activity android:name=".UserViews.OrderDetails" />
         <activity android:name=".UserViews.OrderMapActivity" />
         <activity
@@ -41,6 +45,10 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/maps_api_key" />
+
+        <service
+            android:name=".BackgroundServices.LocationService"
+            android:stopWithTask="true" />
     </application>
 
 </manifest>

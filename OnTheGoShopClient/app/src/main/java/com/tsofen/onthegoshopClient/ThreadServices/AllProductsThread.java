@@ -51,6 +51,8 @@ public class AllProductsThread implements Runnable{
                             product.setName(object.getString("name"));
                         if (object.has("price"))
                             product.setPrice((float) object.getDouble("price"));
+                        if (object.has("id"))
+                            product.setId(object.getInt("id"));
                         products.add(product);
                     }
                 } catch (JSONException e) {

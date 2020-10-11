@@ -79,6 +79,9 @@ public class UserMainView extends AppCompatActivity {
             return;
         }
         //TODO add code to update the number on the cart;
+        CartListAdapters cartListAdapters = CartListAdapters.getInstance();
+        cartListAdapters.getProducts().add(product);
+        cartListAdapters.getCartAdapter().notifyDataSetChanged();
         Log.d(TAG, "AddCartProduct: update cart size");
     }
 

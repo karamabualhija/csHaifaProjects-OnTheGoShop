@@ -6,6 +6,7 @@ public class Driver {
 
     String name;
     String phonenumber;
+    String username;
     ArrayList<Order> orders;
     String vanNum;
     String id;
@@ -16,6 +17,14 @@ public class Driver {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getVanNum() {
