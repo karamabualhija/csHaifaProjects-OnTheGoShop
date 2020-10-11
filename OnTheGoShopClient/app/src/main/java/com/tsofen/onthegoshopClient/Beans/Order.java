@@ -43,4 +43,14 @@ public class Order implements Serializable {
     public void setLatLng(LatLng latLng) {
         this.latLng = latLng;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", totalPrice=" + totalPrice +
+                ", latLng=" + latLng +
+                ", product size" + products.size() +
+                '}';
+    }
 }

@@ -99,6 +99,7 @@ public class NewDriver extends AppCompatActivity {
                             public void run() {
                                 Intent intent = new Intent(NewDriver.this, ManagerDrivers.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                finishAffinity();
                                 startActivity(intent);
                             }
                         });

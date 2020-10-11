@@ -3,6 +3,7 @@ package com.tsofen.onthegoshopClient.LogIn;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tsofen.onthegoshopClient.BackgroundServices.LocationService;
+import com.tsofen.onthegoshopClient.Beans.Driver;
 import com.tsofen.onthegoshopClient.Beans.Manager;
 import com.tsofen.onthegoshopClient.Beans.User;
 import com.tsofen.onthegoshopClient.DataHandlers.LogInHandler;
@@ -61,8 +64,41 @@ public class MainActivity extends AppCompatActivity {
                 finishAffinity();
                 startActivity(intent);
             }
+            else if (type.equals("driver")){
+                startLocationService();
+                Intent intent = new Intent(MainActivity.this, ManagerMain.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                finishAffinity();
+                startActivity(intent);
+            }
 
         }
+    }
+
+    private void startLocationService(){
+        if(!isLocationServiceRunning()){
+            Intent serviceIntent = new Intent(this, LocationService.class);
+//        this.startService(serviceIntent);
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
+
+                MainActivity.this.startForegroundService(serviceIntent);
+            }else{
+                startService(serviceIntent);
+            }
+        }
+    }
+
+    private boolean isLocationServiceRunning() {
+        ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)){
+            if("com.tsofen.onthegoshopClient.BackgroundServices.LocationService".equals(service.service.getClassName())) {
+                Log.d(TAG, "isLocationServiceRunning: location service is already running.");
+                return true;
+            }
+        }
+        Log.d(TAG, "isLocationServiceRunning: location service is not running.");
+        return false;
     }
 
     public void logIn(View view) {
@@ -132,8 +168,25 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void OnDriverLogIn() {
-
+            public void OnDriverLogIn(final Driver driver) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", driver.getUsername());
+                        editor.putString("name", driver.getName());
+                        editor.putString("phone", driver.getPhonenumber());
+                        editor.putString("vanNum", driver.getUsername());
+                        editor.putString("userType", "driver");
+                        editor.putBoolean("loggedIn", true);
+                        editor.apply();
+                        Intent intent = new Intent(MainActivity.this, ManagerMain.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        finishAffinity();
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override

@@ -98,6 +98,7 @@ public class OrderMapActivity extends AppCompatActivity implements
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
                 moveCamera(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude), DEFAULT_ZOOM);
                 mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title(place.getName()));
+                userLatLng = place.getLatLng();
                 mMap.setOnMarkerClickListener(OrderMapActivity.this);
             }
 
@@ -231,6 +232,7 @@ public class OrderMapActivity extends AppCompatActivity implements
     public void useChosenLocation(View view) {
         Log.d(TAG, "useChosenLocation: send the choosen location");
         newOrder.setLatLng(userLatLng);
+        Log.d(TAG, "useChosenLocation: the new Order:" + newOrder.toString());
         //TODO send the order to the server
     }
 }

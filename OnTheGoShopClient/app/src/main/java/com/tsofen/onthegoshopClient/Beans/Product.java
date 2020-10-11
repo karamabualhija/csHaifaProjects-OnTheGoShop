@@ -1,8 +1,9 @@
 package com.tsofen.onthegoshopClient.Beans;
 
 
+import java.io.Serializable;
 
-public class Product {
+public class Product implements Serializable {
 
     int id;
     String name;
@@ -62,5 +63,13 @@ public class Product {
         this.price = price;
     }
 
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", amount=" + amount +
+                ", price=" + price +
+                '}';
+    }
 }

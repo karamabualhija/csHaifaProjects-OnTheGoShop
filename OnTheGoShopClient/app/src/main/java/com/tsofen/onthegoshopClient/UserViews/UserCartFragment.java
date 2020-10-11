@@ -2,6 +2,7 @@ package com.tsofen.onthegoshopClient.UserViews;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 
 
 public class UserCartFragment extends Fragment {
+
+    private static final String TAG = "UserCartFragment";
 
     ListView userCartList;
     Button button;
@@ -55,6 +58,7 @@ public class UserCartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 products = (ArrayList<Product>) dbHandler.getProducts();
+                Log.d(TAG, "onClick: products size: " + products.size());
                 Order order = new Order();
                 order.setProducts(products);
                 Intent intent = new Intent(getContext(), OrderMapActivity.class);
