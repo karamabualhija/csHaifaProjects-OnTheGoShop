@@ -35,9 +35,7 @@ public class Cart_ProductAdapter extends ArrayAdapter<Product> {
         TextView proname= layout.findViewById(R.id.productNameCart);
         TextView proprice = layout.findViewById(R.id.productpriceCart);
         Spinner spin=layout.findViewById(R.id.amount_spinner);
-        Button button = layout.findViewById(R.id.DeleteCartBtn);
 
-        button.setId(position);
         proimg.setImageResource(pro.getImageResId());
         proname.setText(pro.getName());
         proprice.setText(Float.toString(pro.getPrice()));

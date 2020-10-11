@@ -30,7 +30,7 @@ public class UserOrderThread implements Runnable{
         String url;
         switch (state){
             case WAITING_ORDERS:
-                url = urlMaker.createUrl(ServicesName.AllOrders, null);
+                url = urlMaker.createUrl(ServicesName.ActiveOrder, null);
                 break;
             case OLD_ORDERS:
                 url = urlMaker.createUrl(ServicesName.OldOrders, null);

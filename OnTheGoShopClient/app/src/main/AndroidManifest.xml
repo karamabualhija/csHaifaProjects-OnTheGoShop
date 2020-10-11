@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tsofen.onthegoshopClient">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UserViews.OrderDetails"/>
-        <activity android:name=".UserViews.OrderMapActivity"/>
+        <activity android:name=".DriverViews.DriverNewProduct"></activity>
+        <activity android:name=".DriverViews.DriverNavigate" />
+        <activity android:name=".DriverViews.VanStorage" />
+        <activity android:name=".DriverViews.DriverMain" />
+        <activity android:name=".ManagerViews.MangerDriverDetails" />
+        <activity android:name=".UserViews.OrderDetails" />
+        <activity android:name=".UserViews.OrderMapActivity" />
         <activity
             android:name=".UserViews.UserMainView"
             android:windowSoftInputMode="adjustPan" />
@@ -26,7 +31,7 @@
         <activity android:name=".ManagerViews.ManagerStorage" />
         <activity android:name=".ManagerViews.ManagerUsers" />
         <activity android:name=".ManagerViews.ManagerVans" />
-        <activity android:name=".ManagerViews.newProduct" />
+        <activity android:name=".ManagerViews.NewProduct" />
         <activity android:name=".ManagerViews.NewDriver" />
         <activity android:name=".Register.register" />
         <activity android:name=".LogIn.MainActivity">
@@ -36,9 +41,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/maps_api_key" />
+
+        <service
+            android:name=".BackgroundServices.LocationService"
+            android:stopWithTask="true" />
     </application>
 
 </manifest>

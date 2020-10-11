@@ -6,7 +6,34 @@ public class Driver {
 
     String name;
     String phonenumber;
+    String username;
     ArrayList<Order> orders;
+    String vanNum;
+    String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getVanNum() {
+        return vanNum;
+    }
+
+    public void setVanNum(String vanNum) {
+        this.vanNum = vanNum;
+    }
 
     public ArrayList<Order> getOrders() {
         return orders;

@@ -16,17 +16,27 @@ import java.util.ArrayList;
 public class AllProductsThread implements Runnable{
 
     AllProductsHandler handler;
+    String type;
 
-    public AllProductsThread(AllProductsHandler handler) {
+    public AllProductsThread(AllProductsHandler handler, String type) {
         this.handler = handler;
+        this.type = type;
     }
 
     @Override
     public void run() {
         UrlMaker urlMaker = new UrlMaker();
+        String url;
+
+        if(type == null)
+            return;
+        if (type.equals("user"))
+            url = urlMaker.createUrl(ServicesName.AllProducts, null);
+        else
+            url = urlMaker.createUrl(ServicesName.ManagerAllProduct, null);
 
         TextDownloader textDownloader = TextDownloader.getInstance();
-        textDownloader.getText(urlMaker.createUrl(ServicesName.AllProducts, null), new OnDataReadyHandler() {
+        textDownloader.getText(url, new OnDataReadyHandler() {
             @Override
             public void onDataDownloadCompleted(String downloadedData) {
                 ArrayList<Product> products = new ArrayList<>();
@@ -34,11 +44,15 @@ public class AllProductsThread implements Runnable{
                     JSONArray jsonArray = new JSONArray(downloadedData);
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
-                        Product product = new Product(
-                                object.getString("name"),
-                                object.getDouble("amount"),
-                                (float) object.getDouble("price")
-                        );
+                        Product product = new Product();
+                        if (object.has("amount"))
+                            product.setAmount(object.getDouble("amount"));
+                        if (object.has("name"))
+                            product.setName(object.getString("name"));
+                        if (object.has("price"))
+                            product.setPrice((float) object.getDouble("price"));
+                        if (object.has("id"))
+                            product.setId(object.getInt("id"));
                         products.add(product);
                     }
                 } catch (JSONException e) {

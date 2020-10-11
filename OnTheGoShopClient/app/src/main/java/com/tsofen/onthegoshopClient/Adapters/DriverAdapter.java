@@ -27,8 +27,12 @@ public class DriverAdapter extends ArrayAdapter<Driver> {
         Driver driver=getItem(position);
         TextView Drivername=layout.findViewById(R.id.DriverName);
         TextView Driverphone=layout.findViewById(R.id.DriverPhone);
+        TextView DriverVan=layout.findViewById(R.id.DriverVanNum);
+        TextView DriverId=layout.findViewById(R.id.DriverId);
         Drivername.setText(driver.getName());
         Driverphone.setText(driver.getPhonenumber());
+        DriverVan.setText(driver.getVanNum());
+        DriverId.setText(driver.getId());
 
         return layout;
 

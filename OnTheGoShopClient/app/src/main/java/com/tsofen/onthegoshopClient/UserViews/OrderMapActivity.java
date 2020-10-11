@@ -67,12 +67,14 @@ public class OrderMapActivity extends AppCompatActivity implements
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    private LatLng userLatLng;
+    private Order newOrder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_map);
-        Order newOrder = (Order) getIntent().getSerializableExtra("newOrder");
+        newOrder = (Order) getIntent().getSerializableExtra("newOrder");
 
         getLocationPermission();
 
@@ -93,10 +95,10 @@ public class OrderMapActivity extends AppCompatActivity implements
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(@NonNull Place place) {
-                // TODO: Get info about the selected place.
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
                 moveCamera(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude), DEFAULT_ZOOM);
                 mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title(place.getName()));
+                userLatLng = place.getLatLng();
                 mMap.setOnMarkerClickListener(OrderMapActivity.this);
             }
 
@@ -125,6 +127,7 @@ public class OrderMapActivity extends AppCompatActivity implements
     public boolean onMarkerClick(Marker marker) {
         LatLng latLng = marker.getPosition();
         Log.d(TAG, "onMarkerClick: latitude is : " + latLng.latitude + " longitude is: " + latLng.longitude);
+        userLatLng = latLng;
         return false;
     }
 
@@ -145,6 +148,7 @@ public class OrderMapActivity extends AppCompatActivity implements
                             Location currentLocation = (Location) task.getResult();
                             Log.d(TAG, "onComplete: GetDeviceLocation lat is: " + currentLocation.getLatitude() +
                                     "lon is: " + currentLocation.getLongitude());
+                            userLatLng = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
                             moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                     DEFAULT_ZOOM);
 
@@ -221,9 +225,14 @@ public class OrderMapActivity extends AppCompatActivity implements
 
     public void useCurrentLocation(View view) {
         getDeviceLocation();
+        newOrder.setLatLng(userLatLng);
+        //TODO send the order to the server
     }
 
     public void useChosenLocation(View view) {
         Log.d(TAG, "useChosenLocation: send the choosen location");
+        newOrder.setLatLng(userLatLng);
+        Log.d(TAG, "useChosenLocation: the new Order:" + newOrder.toString());
+        //TODO send the order to the server
     }
 }

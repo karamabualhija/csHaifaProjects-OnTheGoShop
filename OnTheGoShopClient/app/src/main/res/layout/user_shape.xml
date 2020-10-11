@@ -33,16 +33,14 @@
 
 
         </LinearLayout>
-<!--        <Button-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_gravity="center||right"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:id="@+id/OrdersButtonusershape"-->
-<!--            android:text="Orders"-->
-<!--            android:onClick="viewOrders"-->
-
-
-<!--            ></Button>-->
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_gravity="center|end"
+            android:layout_height="50dp"
+            android:id="@+id/OrdersButtonusershape"
+            android:text="@string/orders"
+            android:onClick="getUserOrder"
+            />
 
 
     </LinearLayout>

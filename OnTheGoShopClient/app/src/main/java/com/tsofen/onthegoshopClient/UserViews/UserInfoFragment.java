@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.tsofen.onthegoshopClient.LogIn.MainActivity;
 import com.tsofen.onthegoshopClient.R;
+import com.tsofen.onthegoshopClient.ThreadServices.LogoutThread;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -51,9 +54,16 @@ public class UserInfoFragment extends Fragment {
         SharedPreferences.Editor edit  = sharedPreferences.edit();
         edit.remove("loggedIn");
         edit.apply();
+
+        HandlerThread logoutHandlerThread = new HandlerThread("logoutHandlerThread");
+        logoutHandlerThread.start();
+        Handler handler =  new Handler(logoutHandlerThread.getLooper());
+        handler.post(new LogoutThread());
+
         Intent intent = new Intent(view.getContext(), MainActivity.class);
         Activity host = (Activity)view.getContext();
         host.finishAffinity();
         startActivity(intent);
     }
+
 }

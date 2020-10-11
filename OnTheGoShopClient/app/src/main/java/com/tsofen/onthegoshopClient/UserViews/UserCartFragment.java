@@ -2,6 +2,7 @@ package com.tsofen.onthegoshopClient.UserViews;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,12 +22,14 @@ import java.util.ArrayList;
 
 public class UserCartFragment extends Fragment {
 
+    private static final String TAG = "UserCartFragment";
+
     ListView userCartList;
     Button button;
     CartDBHandler dbHandler;
-    Button delButton;
     ArrayList<Product> products;
     Cart_ProductAdapter cartAdapter;
+    CartListAdapters cartListAdapters;
 
     public UserCartFragment() {
         // Required empty public constructor
@@ -39,11 +42,15 @@ public class UserCartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_cart, container, false);
         button  = view.findViewById(R.id.placeOrderb);
-        delButton = view.findViewById(R.id.DeleteCartBtn);
+
+        cartListAdapters = CartListAdapters.getInstance();
 
         dbHandler = new CartDBHandler(getContext(), null, 1);
         products = (ArrayList<Product>) dbHandler.getProducts();
+        cartListAdapters.setProducts(products);
         cartAdapter = new Cart_ProductAdapter(getContext(), products);
+        cartListAdapters.setCartAdapter(cartAdapter);
+
         userCartList= (ListView) view.findViewById(R.id.UserCartList);
         userCartList.setAdapter(cartAdapter);
 
@@ -51,28 +58,18 @@ public class UserCartFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 products = (ArrayList<Product>) dbHandler.getProducts();
+                Log.d(TAG, "onClick: products size: " + products.size());
                 Order order = new Order();
                 order.setProducts(products);
                 Intent intent = new Intent(getContext(), OrderMapActivity.class);
                 intent.putExtra("newOrder", order);
                 startActivity(intent);
-                //TODO send to the server the order data
                 dbHandler.deleteProducts();
                 //TODO set the cart num to 0
             }
         });
 
-        delButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int position = getId();
-                String productName = ((Product)userCartList.getItemAtPosition(position)).getName();
-                products.remove(position);
-                cartAdapter.notifyDataSetChanged();
-                dbHandler.deleteProduct(productName);
-                //TODO update the num on cart
-            }
-        });
         return view;
     }
+
 }

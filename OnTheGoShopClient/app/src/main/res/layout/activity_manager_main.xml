@@ -32,16 +32,16 @@
             android:onClick="setStorage"
             android:layout_rowWeight="1"
             />
-        <Button
-            android:layout_width="match_parent"
-            android:text="@string/vans"
-            android:textColor="@color/black"
-            android:textSize="26sp"
-            android:background="@drawable/roundedbuttonmangermain"
-            android:onClick="setVans"
-            android:layout_rowWeight="1"
-            android:layout_marginTop="10dp"
-            />
+<!--        <Button-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:text="@string/vans"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="26sp"-->
+<!--            android:background="@drawable/roundedbuttonmangermain"-->
+<!--            android:onClick="setVans"-->
+<!--            android:layout_rowWeight="1"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            />-->
         <Button
             android:layout_width="match_parent"
             android:text="@string/drivers"
@@ -69,6 +69,16 @@
             android:textSize="26sp"
             android:background="@drawable/roundedbuttonmangermain"
             android:onClick="setOrders"
+            android:layout_rowWeight="1"
+            android:layout_marginTop="10dp"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:text="@string/log_out"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            android:background="@drawable/roundedbuttonmangermain"
+            android:onClick="mangerLogout"
             android:layout_rowWeight="1"
             android:layout_marginTop="10dp"
             />

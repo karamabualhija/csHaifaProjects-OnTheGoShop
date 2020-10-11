@@ -29,6 +29,7 @@ public class register extends AppCompatActivity {
     public void register(View view) {
 
         registerHandlerThread = new HandlerThread("registerHandlerThread");
+        registerHandlerThread.start();
         registerHandler = new Handler(registerHandlerThread.getLooper());
 
         EditText nameEd = findViewById(R.id.fullname);
@@ -81,9 +82,7 @@ public class register extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Intent intent = new Intent(register.this, MainActivity.class);
-                        finishAffinity();
-                        startActivity(intent);
+                        finish();
                     }
                 });
             }
@@ -94,5 +93,12 @@ public class register extends AppCompatActivity {
             }
         });
         registerHandler.post(registerThread);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (registerHandlerThread.isAlive())
+            registerHandlerThread.quit();
     }
 }

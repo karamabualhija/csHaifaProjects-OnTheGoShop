@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class OrderDetails extends AppCompatActivity {
     TextView orderPrice;
     ArrayList<Product> listProducts;
     ProductOrderDetailAdapter listAdapter;
+    HandlerThread orderDetailsHandlerThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,17 @@ public class OrderDetails extends AppCompatActivity {
                 productsList.setAdapter(listAdapter);
             }
         }, getIntent().getIntExtra("orderID", 0));
-        Handler handler = new Handler();
+        orderDetailsHandlerThread = new HandlerThread("orderDetailsHandlerThread");
+        orderDetailsHandlerThread.start();
+        Handler handler = new Handler(orderDetailsHandlerThread.getLooper());
         handler.post(orderDetailsThread);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (orderDetailsHandlerThread!=null&&orderDetailsHandlerThread.isAlive()){
+            orderDetailsHandlerThread.quit();
+        }
     }
 }
