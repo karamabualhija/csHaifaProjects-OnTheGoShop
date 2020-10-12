@@ -45,8 +45,8 @@ public class AllDriversThread implements Runnable {
                                 driver.setName(object.getString("name"));
                             if (object.has("phonenumber"))
                                 driver.setPhonenumber(object.getString("phonenumber"));
-                            if (object.has("vanNum"))
-                                driver.setVanNum(object.getString("vanNum"));
+                            if (object.has("vannum"))
+                                driver.setVanNum(object.getString("vannum"));
                             drivers.add(driver);
                         }
                         allDriverHandler.onDriversReceived(drivers);

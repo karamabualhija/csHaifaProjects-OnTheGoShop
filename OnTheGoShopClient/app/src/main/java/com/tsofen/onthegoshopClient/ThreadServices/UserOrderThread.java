@@ -11,16 +11,25 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserOrderThread implements Runnable{
 
     public static final int WAITING_ORDERS = 1;
     public static final int OLD_ORDERS = 2;
+    public static final int All_ORDERS = 3;
     private int state;
+    private String username;
     private UserOrderHandler handler;
 
     public UserOrderThread(int state, UserOrderHandler handler) {
         this.state = state;
+        this.handler = handler;
+    }
+
+    public UserOrderThread(int state, String username, UserOrderHandler handler) {
+        this.state = state;
+        this.username = username;
         this.handler = handler;
     }
 
@@ -34,6 +43,11 @@ public class UserOrderThread implements Runnable{
                 break;
             case OLD_ORDERS:
                 url = urlMaker.createUrl(ServicesName.OldOrders, null);
+                break;
+            case All_ORDERS:
+                HashMap<String, String> params = new HashMap<>();
+                params.put("username", username);
+                url = urlMaker.createUrl(ServicesName.getUserOrders, params);
                 break;
             default:
                 url = null;

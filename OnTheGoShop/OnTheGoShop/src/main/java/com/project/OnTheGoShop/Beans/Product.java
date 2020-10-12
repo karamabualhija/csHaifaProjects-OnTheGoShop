@@ -90,10 +90,11 @@ public class Product {
 //		   jo.put("img", this.img);
 		   jo.put("name", this.name);
 		   jo.put("price", this.price);
+		   jo.put("amount", this.amount);
 		   if(flag==2)
 		   {
 			   jo.put("id", this.id);
-			   jo.put("amount", this.amount);  
+//			   jo.put("amount", this.amount);
 		   }
 		   return jo;
 	}

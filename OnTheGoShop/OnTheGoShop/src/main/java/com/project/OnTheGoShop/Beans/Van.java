@@ -43,7 +43,6 @@ public class Van {
 	}
 
 	@Id
-    @GeneratedValue
     public int getId() {
         return id;
     }

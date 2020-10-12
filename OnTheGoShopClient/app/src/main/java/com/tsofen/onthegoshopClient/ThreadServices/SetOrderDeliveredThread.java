@@ -11,10 +11,12 @@ import java.util.HashMap;
 public class SetOrderDeliveredThread implements Runnable {
 
     private int id;
+    private String driverId;
     private SetOrderDeliveredHandler handler;
 
-    public SetOrderDeliveredThread(int id, SetOrderDeliveredHandler handler) {
+    public SetOrderDeliveredThread(int id, String driverId, SetOrderDeliveredHandler handler) {
         this.id = id;
+        this.driverId = driverId;
         this.handler = handler;
     }
 
@@ -22,7 +24,8 @@ public class SetOrderDeliveredThread implements Runnable {
     public void run() {
         UrlMaker urlMaker = new UrlMaker();
         HashMap<String, String> params = new HashMap<>();
-        params.put("id", String.valueOf(id));
+        params.put("order_id", String.valueOf(id));
+        params.put("driver_id", driverId);
 
         TextDownloader textDownloader =TextDownloader.getInstance();
         textDownloader.getText(urlMaker.createUrl(ServicesName.SetOrderDel, params), new OnDataReadyHandler() {

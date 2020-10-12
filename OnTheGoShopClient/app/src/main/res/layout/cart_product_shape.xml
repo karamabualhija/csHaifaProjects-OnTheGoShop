@@ -34,11 +34,13 @@
 
         </TextView>
 
-        <Spinner
+        <EditText
             android:id="@+id/amount_spinner"
             android:layout_width="153dp"
-            android:layout_height="73dp"
+            android:layout_height="49dp"
             android:layout_gravity="center|end"
+            android:inputType="number"
+            android:hint="@string/product_amount"
          />
 
     </LinearLayout>

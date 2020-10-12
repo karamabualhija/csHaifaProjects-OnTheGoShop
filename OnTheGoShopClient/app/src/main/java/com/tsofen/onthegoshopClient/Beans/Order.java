@@ -25,6 +25,10 @@ public class Order implements Serializable {
     }
 
     public void setProducts(List<Product> products) {
+        totalPrice = 0;
+        for (Product product : products) {
+            totalPrice += product.amount * product.price;
+        }
         this.products = products;
     }
 

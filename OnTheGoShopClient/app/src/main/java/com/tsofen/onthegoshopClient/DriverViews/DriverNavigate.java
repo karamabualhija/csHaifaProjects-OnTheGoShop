@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -220,7 +221,9 @@ public class DriverNavigate extends AppCompatActivity implements OnMapReadyCallb
     }
 
     public void setOrderDelivered(View view) {
-        SetOrderDeliveredThread orderDeliveredThread = new SetOrderDeliveredThread(orderId,
+        SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
+        String driverId = sharedPreferences.getString("id", null);
+        SetOrderDeliveredThread orderDeliveredThread = new SetOrderDeliveredThread(orderId, driverId,
                 new SetOrderDeliveredHandler() {
                     @Override
                     public void onOrderChanged() {

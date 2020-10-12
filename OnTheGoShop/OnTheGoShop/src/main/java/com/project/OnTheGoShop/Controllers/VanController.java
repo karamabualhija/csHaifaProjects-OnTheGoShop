@@ -1,5 +1,6 @@
 package com.project.OnTheGoShop.Controllers;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -64,6 +65,7 @@ public class VanController {
 	    {
 	    	int productid=products.get(i).getProductid();
 	    	Product pro=probl.findpro(productid);
+	    	pro.setAmount(products.get(i).getAmount());
 	    	jsonArray.add(pro.toJson1());
 	    }
 	    return jsonArray;
@@ -82,7 +84,7 @@ public class VanController {
 		*/
 //		int id=(int) session.getAttribute("id");
 		Van res=vanbl.findvan(id);
-		ArrayList<Order> orders=(ArrayList<Order>) res.getOrders();
+		List<Order> orders= res.getOrders();
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<orders.size();i++)
 	    {
@@ -114,9 +116,10 @@ public class VanController {
 	{	   
 	  vanbl.updatelocation(lag,lan,id);
 	  Van v=vanbl.findvan(id);
-	  Sort.Updatedistances((ArrayList<Order>) v.getOrders(),lag,lan);
+	  Sort.Updatedistances(v.getOrders(),lag,lan);
 	 		
 	}
+
 	@GetMapping("addtostorage")
 	String addtostorage(@RequestParam int van_id,@RequestParam int pro_id,@RequestParam int amount) {
 		Product pro=probl.findpro(pro_id);
@@ -126,17 +129,15 @@ public class VanController {
 		probl.updatestorage(pro_id,proamount-amount);
 		van_products vp=vanpr.findByProductid(pro_id);
 		if(vp==null) {
+			System.out.println("van id: " + van_id);
 		vp= new van_products(van_id,pro_id,amount);
 		vanpr.save(vp);}
 		else {
 			vanpr.updateamount(vp.getId(),vp.getAmount()+amount);
 		}
-		
+
 		probl.updatestorage(pro_id, proamount-amount);
 		return "successss";
-		
-		
-		
 	}
 
 	

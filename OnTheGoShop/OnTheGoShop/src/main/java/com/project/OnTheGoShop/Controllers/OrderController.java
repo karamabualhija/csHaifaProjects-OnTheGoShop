@@ -11,6 +11,7 @@ import com.project.OnTheGoShop.BL.UserBL;
 import com.project.OnTheGoShop.Beans.Order;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,7 +27,7 @@ public class OrderController {
 	UserBL userbl;
 	
 	@GetMapping("placeOrder")
-	String place(@RequestParam String jsonstrinf,@RequestParam int user_id,@RequestParam String lat,@RequestParam String lon) throws ParseException
+	String place(@RequestParam List<JSONObject> jsonstrinf, @RequestParam int user_id, @RequestParam String lat, @RequestParam String lon) throws ParseException
 	{
 		return orderbl.placeorder(jsonstrinf,user_id,lat,lon);
 		
