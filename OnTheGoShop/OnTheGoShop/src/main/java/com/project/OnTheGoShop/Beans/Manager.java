@@ -20,6 +20,7 @@ public class Manager extends Person {
 		   jo.put("username", this.username);
 		   jo.put("phone", this.phonenumber);
 		   jo.put("type", "Manager");
+		   jo.put("id", this.id);
 		   return jo;
 	}
 	@Override

@@ -14,12 +14,14 @@ public enum ServicesName {
     DriverProduct("Van/getVanStorage"),
     DriverOrders("Van/getVanOrders"),
     UpdateDriverLocation("Van/updatelocation"),
-    AddProductVan(""),
-    SetOrderDel(""),
+    AddProductVan("Van/addtostorage"),
+    SetOrderDel("Driver/orderreceived"),
     AllOrders("Order/AllOrders"),
     OldOrders("Order/OldOrders"),
     ActiveOrder("Order/ActiveOrders"),
-    OrderDetails("Order/OrderDetails");
+    OrderDetails("Order/OrderDetails"),
+    getUserOrders("Order/getUserOrders"),
+    PlaceOrder("Order/placeOrder");
 
 
     String url;

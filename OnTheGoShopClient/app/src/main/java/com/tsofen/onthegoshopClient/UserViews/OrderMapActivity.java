@@ -18,6 +18,8 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -46,9 +48,18 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.tsofen.onthegoshopClient.Beans.Order;
+import com.tsofen.onthegoshopClient.Beans.Product;
+import com.tsofen.onthegoshopClient.DataHandlers.PlaceOrderHandler;
 import com.tsofen.onthegoshopClient.R;
+import com.tsofen.onthegoshopClient.ThreadServices.PlaceOrderThread;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class OrderMapActivity extends AppCompatActivity implements
         GoogleMap.OnMarkerClickListener,
@@ -70,11 +81,15 @@ public class OrderMapActivity extends AppCompatActivity implements
     private LatLng userLatLng;
     private Order newOrder;
 
+    private HandlerThread placeOrderHandlerThread;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_map);
         newOrder = (Order) getIntent().getSerializableExtra("newOrder");
+        placeOrderHandlerThread = new HandlerThread("placeOrderHandlerThread");
+        placeOrderHandlerThread.start();
 
         getLocationPermission();
 
@@ -105,7 +120,6 @@ public class OrderMapActivity extends AppCompatActivity implements
 
             @Override
             public void onError(@NonNull Status status) {
-                // TODO: Handle the error.
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
@@ -226,13 +240,68 @@ public class OrderMapActivity extends AppCompatActivity implements
     public void useCurrentLocation(View view) {
         getDeviceLocation();
         newOrder.setLatLng(userLatLng);
-        //TODO send the order to the server
+        ArrayList<Product> products = (ArrayList<Product>) newOrder.getProducts();
+//        List<Product> proJson = new ArrayList<>();
+//        try {
+//            for (Product product : products) {
+//                JSONObject object = new JSONObject();
+//                object.put("id", product.getId());
+//                object.put("name", product.getName());
+//                object.put("amount", product.getAmount());
+//                object.put("price", product.getPrice());
+//                proJson.add(object);
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        String jsonPro = products.toString();
+        String userId = getSharedPreferences("login", MODE_PRIVATE).getString("id", null);
+        PlaceOrderThread placeOrderThread = new PlaceOrderThread(jsonPro, Integer.parseInt(userId)
+                , String.valueOf(newOrder.getLatLng().latitude), String.valueOf(newOrder.getLatLng().longitude),
+                new PlaceOrderHandler() {
+            @Override
+            public void onOrderPlaced() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+        Handler handler = new Handler(placeOrderHandlerThread.getLooper());
+        handler.post(placeOrderThread);
     }
 
     public void useChosenLocation(View view) {
         Log.d(TAG, "useChosenLocation: send the choosen location");
         newOrder.setLatLng(userLatLng);
         Log.d(TAG, "useChosenLocation: the new Order:" + newOrder.toString());
-        //TODO send the order to the server
+        JSONArray proJson = new JSONArray(newOrder.getProducts());
+        String jsonPro = proJson.toString();
+        String userId = getSharedPreferences("login", MODE_PRIVATE).getString("id", null);
+        Log.d(TAG, "useChosenLocation: new Order Products: " + newOrder.getProducts().toString());
+        PlaceOrderThread placeOrderThread = new PlaceOrderThread(jsonPro, Integer.parseInt(userId)
+                , String.valueOf(newOrder.getLatLng().latitude), String.valueOf(newOrder.getLatLng().longitude),
+                new PlaceOrderHandler() {
+                    @Override
+                    public void onOrderPlaced() {
+
+                    }
+
+                    @Override
+                    public void onFailure() {
+
+                    }
+                });
+        Handler handler = new Handler(placeOrderHandlerThread.getLooper());
+        handler.post(placeOrderThread);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (placeOrderHandlerThread!=null && placeOrderHandlerThread.isAlive())
+            placeOrderHandlerThread.quit();
     }
 }

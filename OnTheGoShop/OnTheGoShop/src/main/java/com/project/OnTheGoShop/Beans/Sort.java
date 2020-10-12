@@ -1,6 +1,7 @@
 package com.project.OnTheGoShop.Beans;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Sort {
 //	ArrayList<Order> orders;
@@ -34,7 +35,7 @@ public abstract class Sort {
 //		super();
 //		// TODO Auto-generated constructor stub
 //	}
-	public static void Updatedistances(ArrayList<Order> orders,String lang,String lat) {
+	public static void Updatedistances(List<Order> orders, String lang, String lat) {
 		    for(int i=0;i<orders.size();i++)
 		    {
 		    	double d=distance(Double.parseDouble(lat),Double.parseDouble(lang), Double.parseDouble(orders.get(i).getLat()),Double.parseDouble(orders.get(i).getLan() ));

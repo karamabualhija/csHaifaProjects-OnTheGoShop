@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +19,7 @@ import com.tsofen.onthegoshopClient.DBHandler.CartDBHandler;
 import com.tsofen.onthegoshopClient.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class UserCartFragment extends Fragment {
@@ -57,7 +59,19 @@ public class UserCartFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                List<Integer> amount = new ArrayList<>();
+                if(userCartList != null){
+                    for(int i = 0; i< userCartList.getChildCount();i++){
+                        View vie = userCartList.getChildAt(i);
+                        EditText ed1= (EditText) vie.findViewById(R.id.amount_spinner);
+                        Log.d("value",ed1.getText().toString());
+                        amount.add(Integer.valueOf(ed1.getText().toString()));
+                    }
+                }
                 products = (ArrayList<Product>) dbHandler.getProducts();
+                for (int i = 0; i < products.size(); i++) {
+                    products.get(i).setAmount(amount.get(i));
+                }
                 Log.d(TAG, "onClick: products size: " + products.size());
                 Order order = new Order();
                 order.setProducts(products);

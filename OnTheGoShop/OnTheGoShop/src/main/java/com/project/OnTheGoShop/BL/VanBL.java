@@ -32,5 +32,8 @@ public class VanBL {
 		vanRepository.save(v);
 	}
 	
+	public void add(Van van){
+		vanRepository.save(van);
+	}
 
 }

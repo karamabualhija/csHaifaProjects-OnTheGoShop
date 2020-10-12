@@ -83,6 +83,7 @@ public class UserOrderFragment extends Fragment {
                         });
                     }
                 });
+                handler = new Handler(userOrderHandlerThread.getLooper());
                 handler.post(orderThread);
             }
         });
@@ -104,6 +105,7 @@ public class UserOrderFragment extends Fragment {
                         });
                     }
                 });
+                handler = new Handler(userOrderHandlerThread.getLooper());
                 handler.post(orderThread);
             }
         });

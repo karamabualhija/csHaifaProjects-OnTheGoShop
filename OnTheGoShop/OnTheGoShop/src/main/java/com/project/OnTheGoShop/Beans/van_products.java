@@ -18,7 +18,6 @@ public class van_products {
 		this.amount = amount;
 	}
 	public van_products( int vanid, int product_id, int amount) {
-		super();
 		this.vanid = vanid;
 		this.productid = product_id;
 		this.amount = amount;

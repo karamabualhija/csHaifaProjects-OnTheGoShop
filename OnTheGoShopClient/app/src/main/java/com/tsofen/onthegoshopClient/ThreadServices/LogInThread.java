@@ -51,6 +51,7 @@ public class LogInThread implements Runnable{
                             user.setPhonenumber(jsonObject.getString("phone"));
                             user.setUsername(jsonObject.getString("username"));
                             user.setName(jsonObject.getString("name"));
+                            user.setSys_id(jsonObject.getInt("id"));
                             logInHandler.OnUserLogIn(user);
                         }
                         else if(jsonObject.getString("type").equals("Manager")){
@@ -58,6 +59,7 @@ public class LogInThread implements Runnable{
                             manager.setPhonenumber(jsonObject.getString("phone"));
                             manager.setUsername(jsonObject.getString("username"));
                             manager.setName(jsonObject.getString("name"));
+                            manager.setSys_id(jsonObject.getInt("id"));
                             logInHandler.OnManagerLogIn(manager);
 
                         }else if(jsonObject.getString("type").equals("Driver")){
@@ -65,7 +67,8 @@ public class LogInThread implements Runnable{
                             driver.setName(jsonObject.getString("name"));
                             driver.setPhonenumber(jsonObject.getString("Phonenumbe"));
                             driver.setUsername(jsonObject.getString("username"));
-                            driver.setVanNum(String.valueOf(jsonObject.getInt("vanNum")));
+                            driver.setVanNum(String.valueOf(jsonObject.getInt("vannum")));
+                            driver.setId(jsonObject.getString("id"));
                             logInHandler.OnDriverLogIn(driver);
                         }
                         else{

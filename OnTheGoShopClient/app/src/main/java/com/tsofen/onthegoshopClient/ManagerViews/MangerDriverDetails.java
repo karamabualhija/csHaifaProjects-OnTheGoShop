@@ -35,17 +35,14 @@ import com.tsofen.onthegoshopClient.ThreadServices.DriverProductsThread;
 import com.tsofen.onthegoshopClient.UserViews.OrderMapActivity;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MangerDriverDetails extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG = "MangerDriverDetails";
 
-    private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-
-    private long sleepTime = 60 * 1000;
-    private boolean refreshDriverLocation = true;
+    private static final long sleepTime = 60 * 1000;
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
     private String driverId;
@@ -70,7 +67,9 @@ public class MangerDriverDetails extends AppCompatActivity implements OnMapReady
         driverProductsListV = findViewById(R.id.driverDetailsList);
         driverOrdersList = findViewById(R.id.driverDetailsOrderList);
 
-        getLocationPermission();
+        initMap();
+
+        refreshDriverLocation();
 
         getDriverProducts();
 
@@ -141,30 +140,40 @@ public class MangerDriverDetails extends AppCompatActivity implements OnMapReady
         }
     }
 
+
+    public void refreshDriverLocation(){
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask()
+        {
+            public void run()
+            {
+                getDriverLocation();  // display the data
+            }
+        }, 1000, sleepTime);
+    }
+
     private void getDriverLocation() {
         HandlerThread driverLocationHandlerThread = new HandlerThread("driverLocationHandlerThread");
         driverLocationHandlerThread.start();
-        while (refreshDriverLocation){
-            DriverLocationThread driverLocationThread = new DriverLocationThread(driverId, new DriverLocationHandler() {
-                @Override
-                public void onLocationReceived(final LatLng latLng) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            setMarkerOnMap(latLng);
-                        }
-                    });
-                }
+        DriverLocationThread driverLocationThread = new DriverLocationThread(driverId, new DriverLocationHandler() {
+            @Override
+            public void onLocationReceived(final LatLng latLng) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setMarkerOnMap(latLng);
+                    }
+                });
+            }
 
-                @Override
-                public void onFailure() {
+            @Override
+            public void onFailure() {
 
-                }
-            });
-            Handler handler = new Handler(driverLocationHandlerThread.getLooper());
-            handler.post(driverLocationThread);
-            SystemClock.sleep(sleepTime);
-        }
+            }
+        });
+        Handler handler = new Handler(driverLocationHandlerThread.getLooper());
+        handler.post(driverLocationThread);
+
     }
 
     private void setMarkerOnMap(LatLng latLng){
@@ -180,57 +189,9 @@ public class MangerDriverDetails extends AppCompatActivity implements OnMapReady
         mapFragment.getMapAsync(MangerDriverDetails.this);
     }
 
-    private void getLocationPermission(){
-        Log.d(TAG, "getLocationPermission: getting location permissions");
-        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION};
-
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                mLocationPermissionsGranted = true;
-                initMap();
-            }else{
-                ActivityCompat.requestPermissions(this,
-                        permissions,
-                        LOCATION_PERMISSION_REQUEST_CODE);
-            }
-        }else{
-            ActivityCompat.requestPermissions(this,
-                    permissions,
-                    LOCATION_PERMISSION_REQUEST_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.d(TAG, "onRequestPermissionsResult: called.");
-        mLocationPermissionsGranted = false;
-
-        switch(requestCode){
-            case LOCATION_PERMISSION_REQUEST_CODE:{
-                if(grantResults.length > 0){
-                    for(int i = 0; i < grantResults.length; i++){
-                        if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
-                            mLocationPermissionsGranted = false;
-                            Log.d(TAG, "onRequestPermissionsResult: permission failed");
-                            return;
-                        }
-                    }
-                    Log.d(TAG, "onRequestPermissionsResult: permission granted");
-                    mLocationPermissionsGranted = true;
-                    //initialize our map
-                    initMap();
-                }
-            }
-        }
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        refreshDriverLocation = false;
         if (driverDetailsOrderHandlerThread!=null && driverDetailsOrderHandlerThread.isAlive())
             driverDetailsOrderHandlerThread.quit();
         if (driverDetailsProductHandlerThread!=null && driverDetailsProductHandlerThread.isAlive())

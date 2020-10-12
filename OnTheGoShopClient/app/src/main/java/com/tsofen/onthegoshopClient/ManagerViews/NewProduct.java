@@ -80,6 +80,11 @@ public class NewProduct extends AppCompatActivity {
             }
 
             @Override
+            public void onProductNotAdded() {
+
+            }
+
+            @Override
             public void onFailure() {
                 Toast.makeText(NewProduct.this, "failed to add the product try again", Toast.LENGTH_LONG).show();
             }

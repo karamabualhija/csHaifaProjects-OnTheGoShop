@@ -35,11 +35,11 @@ public class AddProductVanAdapter extends ArrayAdapter<Product> {
         TextView proName= layout.findViewById(R.id.addProductToVanName);
         TextView proAmount = layout.findViewById(R.id.addProductToVanAmount);
         TextView proID = layout.findViewById(R.id.addProductToVanID);
-        Spinner spin=layout.findViewById(R.id.amount_spinner);
+        Spinner spin=layout.findViewById(R.id.addAmountToPro);
 
         proName.setText(pro.getName());
         proAmount.setText(String.valueOf(pro.getAmount()));
-        proID.setText(pro.getId());
+        proID.setText(String.valueOf(pro.getId()));
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, options);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);

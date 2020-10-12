@@ -38,6 +38,8 @@ public class DriverController {
 		if (van!=null)
 			return "please change van num";
 		van=new Van(vanNum);
+		System.out.println("the van nu is " + vanNum);
+		vanbl.add(van);
 		Driver d1=driverbl.findbuusername(username);
 		if(d1!=null)
 			return "please change the username and try again";
@@ -50,7 +52,6 @@ public class DriverController {
 	JSONArray getAllDrivers()
 	{
 		ArrayList<Driver> res=driverbl.findalldrivers();
-		System.err.println(res.size());
 	    JSONArray jsonArray = new JSONArray();
 	    for(int i=0;i<res.size();i++)
 	    {

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tsofen.onthegoshopClient.Adapters.DriverOrderNavAdapter;
+import com.tsofen.onthegoshopClient.BackgroundServices.LocationService;
 import com.tsofen.onthegoshopClient.Beans.Order;
 import com.tsofen.onthegoshopClient.DataHandlers.DriverOrdersHandler;
 import com.tsofen.onthegoshopClient.LogIn.MainActivity;
@@ -87,6 +88,8 @@ public class DriverMain extends AppCompatActivity {
         edit.remove("vanNum");
         edit.apply();
 
+        Intent serviceIntent = new Intent(this, LocationService.class);
+        stopService(serviceIntent);
         HandlerThread logoutHandlerThread = new HandlerThread("logoutHandlerThread");
         logoutHandlerThread.start();
         Handler handler =  new Handler(logoutHandlerThread.getLooper());
