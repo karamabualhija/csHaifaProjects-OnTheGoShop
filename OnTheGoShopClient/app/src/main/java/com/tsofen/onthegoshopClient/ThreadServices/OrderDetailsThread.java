@@ -36,7 +36,7 @@ public class OrderDetailsThread implements Runnable {
     public void run() {
         UrlMaker urlMaker = new UrlMaker();
         Map<String, String> params = new HashMap<>();
-        params.put("orderId", String.valueOf(orderID));
+        params.put("orders_id", String.valueOf(orderID));
 
         TextDownloader textDownloader = TextDownloader.getInstance();
 
@@ -49,7 +49,7 @@ public class OrderDetailsThread implements Runnable {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         Product product = new Product();
-                        product.setAmount(object.getDouble("amount"));
+                        product.setAmount(object.getInt("amount"));
                         product.setName(object.getString("name"));
                         product.setPrice((float) object.getDouble("price"));
                         products.add(product);

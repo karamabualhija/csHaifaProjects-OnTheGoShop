@@ -1,5 +1,6 @@
 package com.tsofen.onthegoshopClient.ManagerViews;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -75,11 +76,12 @@ public class ManagerUsers extends AppCompatActivity {
 
     public void getUserOrder(View v){
         LinearLayout linearLayout = (LinearLayout) v.getParent();
-        TextView name = linearLayout.findViewById(R.id.UserNameshape);
-
-        //TODO show him the orders of this person
+        TextView name = linearLayout.findViewById(R.id.AllUserUsername);
 
         Log.d(TAG, "getUserOrder: requesting the orders of: " + name.getText().toString());
+        Intent intent = new Intent(this, ManagerUserOrders.class);
+        intent.putExtra("username", name.getText().toString());
+        startActivity(intent);
 
     }
 }

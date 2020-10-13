@@ -46,7 +46,7 @@ public class AllOrdersThread implements Runnable {
                                 Order order = new Order();
                                 order.setId(object.getInt("id"));
                                 order.setTotalPrice((float) object.getDouble("price"));
-                                order.setLatLng(new LatLng(object.getDouble("lat"), object.getDouble("lon")));
+                                order.setLatLng(new LatLng(object.getDouble("lat"), object.getDouble("lan")));
                                 orders.add(order);
                             }
                         }

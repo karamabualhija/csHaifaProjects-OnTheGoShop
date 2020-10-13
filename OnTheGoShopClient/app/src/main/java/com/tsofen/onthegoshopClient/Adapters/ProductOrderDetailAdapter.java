@@ -21,6 +21,7 @@ public class ProductOrderDetailAdapter extends ArrayAdapter<Product> {
 
     public ProductOrderDetailAdapter(@NonNull Context context, @NonNull ArrayList<Product> objects) {
         super(context, 0, objects);
+        inflater=LayoutInflater.from(context);
     }
 
     @NonNull

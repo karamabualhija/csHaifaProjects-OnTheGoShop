@@ -77,9 +77,8 @@ public class UserCartFragment extends Fragment {
                 order.setProducts(products);
                 Intent intent = new Intent(getContext(), OrderMapActivity.class);
                 intent.putExtra("newOrder", order);
+                getActivity().finishAffinity();
                 startActivity(intent);
-                dbHandler.deleteProducts();
-                //TODO set the cart num to 0
             }
         });
 

@@ -80,4 +80,11 @@ public class ManagerStorage extends AppCompatActivity {
         if (managerStorageHandlerThread!=null && managerStorageHandlerThread.isAlive())
             managerStorageHandlerThread.quit();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, ManagerMain.class);
+        startActivity(intent);
+    }
 }

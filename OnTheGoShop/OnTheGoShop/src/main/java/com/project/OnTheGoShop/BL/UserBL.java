@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserBL {
@@ -23,12 +24,12 @@ public class UserBL {
         return false;
     }
 
-	public ArrayList<Order> finduserorders(int sys_id) {
-		return (ArrayList<Order>) userRepository.findById(sys_id).getOrders();
+	public List<Order> finduserorders(int sys_id) {
+		return userRepository.findById(sys_id).getOrders();
 	}
 
-	public ArrayList<Order> finduserorders(String username) {
-		return (ArrayList<Order>) userRepository.findByUsername(username).getOrders();
+	public List<Order> finduserorders(String username) {
+		return userRepository.findByUsername(username).getOrders();
 	}
 
 	public ArrayList<User> findall() {

@@ -45,11 +45,11 @@ public class DriverOrdersThread implements Runnable {
                         ArrayList<Order> orders =new ArrayList<>();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
-                            if (object.has("id") && object.has("price") && object.has("lat") && object.has("lon")){
+                            if (object.has("id") && object.has("price") && object.has("lat") && object.has("lan")){
                                 Order order = new Order();
-                                order.setLatLng(new LatLng(object.getDouble("lat"), object.getDouble("lon")));
+                                order.setLatLng(new LatLng(object.getDouble("lat"), object.getDouble("lan")));
                                 order.setTotalPrice((float) object.getDouble("price"));
-                                order.setId(object.getInt("orderId"));
+                                order.setId(object.getInt("id"));
                                 orders.add(order);
                             }
                         }

@@ -101,6 +101,7 @@ public class DriverMain extends AppCompatActivity {
 
     public void showVanProducts(View view) {
         Intent intent = new Intent(this, VanStorage.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 

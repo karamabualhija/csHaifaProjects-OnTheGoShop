@@ -66,12 +66,15 @@ public class UserMainView extends AppCompatActivity {
         LinearLayout rl = (LinearLayout) v.getParent();
         TextView productNameTv = (TextView)rl.findViewById(R.id.productName);
         TextView productPriceTv = rl.findViewById(R.id.productprice);
+        TextView productIdTv = rl.findViewById(R.id.productId);
         String productPrice = productPriceTv.getText().toString();
         String productName = productNameTv.getText().toString();
+        String productId = productIdTv.getText().toString();
 
         Product product = new Product();
         product.setName(productName);
         product.setPrice(Float.parseFloat(productPrice));
+        product.setId(Integer.parseInt(productId));
 
         CartDBHandler cartDBHandler = new CartDBHandler(this, null, 1);
         if(!cartDBHandler.addProduct(product)){

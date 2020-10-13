@@ -28,7 +28,14 @@ public class Product {
 		this.price = price;
 	}
 
-//	@Column
+    public Product(int id, String name, int amount, float price) {
+        this.id = id;
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+    }
+
+    //	@Column
 //    public String getImg() {
 //		return img;
 //	}
@@ -91,11 +98,7 @@ public class Product {
 		   jo.put("name", this.name);
 		   jo.put("price", this.price);
 		   jo.put("amount", this.amount);
-		   if(flag==2)
-		   {
-			   jo.put("id", this.id);
-//			   jo.put("amount", this.amount);
-		   }
+		   jo.put("id", this.id);
 		   return jo;
 	}
 

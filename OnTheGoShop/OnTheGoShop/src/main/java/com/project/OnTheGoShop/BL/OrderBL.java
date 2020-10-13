@@ -1,5 +1,6 @@
 package com.project.OnTheGoShop.BL;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +42,7 @@ public class OrderBL {
 	
 	
 
-	public ArrayList<Order> findallorders() {
+	public List<Order> findallorders() {
 		return orderRepository.findAll();
 	}
 
@@ -53,7 +54,9 @@ public class OrderBL {
 	    for(int i=0;i<res.size();i++)
 	    {
 	    	int productid=res.get(i).getProductid();
+	    	int amount = res.get(i).getAmount();
 	    	Product pro=prorepo.findById(productid);
+	    	pro.setAmount(amount);
 	    	jsonArray.add(pro.toJson1());
 	    }
 	    return jsonArray;
@@ -78,7 +81,7 @@ public class OrderBL {
 	return orderRepository.findById(orders_id);
 	}
 
-	public String placeorder(List<JSONObject> jsonstring, int userid, String lat, String lon) throws ParseException {
+	public String placeorder(String jsonstring, int userid, String lat, String lon) throws ParseException {
 		
         Order order = new Order(lon,lat);
         orderRepository.save(order);
@@ -142,7 +145,6 @@ public class OrderBL {
 	}
 
 	private boolean checkstorage(Van v, Order order) {
-//		ArrayList<van_products> vanproducts=vanprorepo.findAllByVanid(v.getId());
 		ArrayList<order_product> orderproducts=oderprorepo.findAllByOrderid(order.getId());
 	    for(int i=0;i<orderproducts.size();i++)
 	    {
@@ -154,24 +156,17 @@ public class OrderBL {
 	    return true;
 	}
 
-	private void addpros(int orderid, List<JSONObject> jsonstring) throws ParseException {
+	private void addpros(int orderid, String jsonstring) throws ParseException {
 		int amount=0,id=0;
-//		JSONArray jsonarray=new JSONArray();
 		
-//		JSONParser jsonparser=new JSONParser(jsonstring);
-//		JSONArray jsonarray=jsonparser.parseObject();
-		
-//		JSONParser parser = new JSONParser(jsonstring);
-//		Object resultObject = parser.parse();
-//		ArrayList<?> arrayList = (ArrayList<?>) resultObject;
-//		jsonarray = (JSONArray) resultObject;
-	    for(int i=0;i<jsonstring.size();i++)
+		JSONParser parser = new JSONParser(jsonstring);
+		Object resultObject = parser.parse();
+		ArrayList<JSONObject> jsonObject= (ArrayList<JSONObject>) resultObject;
+	    for(int i=0;i<jsonObject.size();i++)
 	    {
-	    	JSONObject jsonob = jsonstring.get(i);
-	    	if(jsonob.containsKey("id"))
-	    	 id= (int) jsonob.get("id");
-	    	if(jsonob.containsKey("amount"))
-	    	 amount=(int) jsonob.get("amount");
+	    	HashMap<String, BigInteger> product = (HashMap<String, BigInteger>) jsonObject.get(i);
+	    	id= product.get("id").intValue();
+	    	amount= product.get("amount").intValue();
 	    	order_product o_p=new order_product(orderid,id,amount);
 	    	oderprorepo.save(o_p);
 	    }

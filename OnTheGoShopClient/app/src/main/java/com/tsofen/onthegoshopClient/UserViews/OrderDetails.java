@@ -30,8 +30,8 @@ public class OrderDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
 
-        String title = "Order " + getIntent().getIntExtra("orderID", 0) + "contains:";
-        String totalPrice = String.valueOf(getIntent().getFloatExtra("orderPrice", 0));
+        String title = "Order " + getIntent().getStringExtra("orderID") + " contains:";
+        String totalPrice = getIntent().getStringExtra("orderPrice");
 
         productsList = findViewById(R.id.orderDetailsList);
         orderId = findViewById(R.id.orderDetailsID);
@@ -42,12 +42,17 @@ public class OrderDetails extends AppCompatActivity {
 
         OrderDetailsThread orderDetailsThread = new OrderDetailsThread(new OrderDetailsHandler() {
             @Override
-            public void onProductsReceived(ArrayList<Product> products) {
-                listProducts = products;
-                listAdapter = new ProductOrderDetailAdapter(getBaseContext(), listProducts);
-                productsList.setAdapter(listAdapter);
+            public void onProductsReceived(final ArrayList<Product> products) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        listProducts = products;
+                        listAdapter = new ProductOrderDetailAdapter(OrderDetails.this, listProducts);
+                        productsList.setAdapter(listAdapter);
+                    }
+                });
             }
-        }, getIntent().getIntExtra("orderID", 0));
+        }, Integer.parseInt(getIntent().getStringExtra("orderID")));
         orderDetailsHandlerThread = new HandlerThread("orderDetailsHandlerThread");
         orderDetailsHandlerThread.start();
         Handler handler = new Handler(orderDetailsHandlerThread.getLooper());

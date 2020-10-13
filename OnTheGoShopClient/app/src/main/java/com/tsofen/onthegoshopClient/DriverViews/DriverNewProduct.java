@@ -69,15 +69,16 @@ public class DriverNewProduct extends AppCompatActivity {
         Spinner spin = linearLayout.findViewById(R.id.addAmountToPro);
         Product product = new Product();
         product.setId(Integer.parseInt(idTV.getText().toString()));
-        product.setAmount(Double.parseDouble(spin.getSelectedItem().toString()));
+        product.setAmount(Integer.parseInt(spin.getSelectedItem().toString()));
         SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         String vanId = sharedPreferences.getString("vanNum", null);
         AddProductVanThread productVanThread = new AddProductVanThread(String.valueOf(product.getId()),
-                String.valueOf((int)product.getAmount()), vanId, new NewProductHandler() {
+                String.valueOf(product.getAmount()), vanId, new NewProductHandler() {
                     @Override
                     public void onProductAdded() {
                         Toast.makeText(DriverNewProduct.this, "product added", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(DriverNewProduct.this, VanStorage.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         finishAffinity();
                         startActivity(intent);
                     }

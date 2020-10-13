@@ -24,11 +24,12 @@ public class CartDBHandler extends SQLiteOpenHelper {
     private static final String COLUMN_PRICE = "price";
     private static final String COLUMN_AMOUNT = "amount";
     private static final String COLUMN_NAME = "name";
+    private static final String COLUMN_PRODUCT_ID = "productid";
 
     private static int size = 0;
 
     public CartDBHandler(@Nullable Context context, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, version);
+        super(context, DATABASE_NAME, factory, 3);
     }
 
     @Override
@@ -37,7 +38,8 @@ public class CartDBHandler extends SQLiteOpenHelper {
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                 COLUMN_NAME + " TEXT," +
                 COLUMN_PRICE + " FLOAT," +
-                COLUMN_AMOUNT + " DOUBLE" +
+                COLUMN_AMOUNT + " INTEGER," +
+                COLUMN_PRODUCT_ID + " INTEGER" +
                 ");";
         sqLiteDatabase.execSQL(query);
     }
@@ -61,6 +63,7 @@ public class CartDBHandler extends SQLiteOpenHelper {
         values.put(COLUMN_NAME, product.getName());
         values.put(COLUMN_AMOUNT, product.getAmount());
         values.put(COLUMN_PRICE, product.getPrice());
+        values.put(COLUMN_PRODUCT_ID, product.getId());
         db.insert(TABLE_NAME, null, values);
         size++;
         db.close();
@@ -83,8 +86,10 @@ public class CartDBHandler extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()){
             String name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME));
             float price = cursor.getFloat(cursor.getColumnIndex(COLUMN_PRICE));
-            double amount = cursor.getDouble(cursor.getColumnIndex(COLUMN_AMOUNT));
+            int amount = cursor.getInt(cursor.getColumnIndex(COLUMN_AMOUNT));
+            int id = cursor.getInt(cursor.getColumnIndex(COLUMN_PRODUCT_ID));
             Product product = new Product(name, amount, price);
+            product.setId(id);
             products.add(product);
             cursor.moveToNext();
         }

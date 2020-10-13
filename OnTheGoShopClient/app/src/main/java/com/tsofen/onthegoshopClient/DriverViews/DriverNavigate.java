@@ -60,7 +60,7 @@ public class DriverNavigate extends AppCompatActivity implements OnMapReadyCallb
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
 
     private GoogleMap mMap;
-    private Boolean mLocationPermissionsGranted = false;
+    private Boolean mLocationPermissionsGranted = true;
     private FusedLocationProviderClient mFusedLocationProviderClient;
 
     private ListView orderProListV;
@@ -80,10 +80,11 @@ public class DriverNavigate extends AppCompatActivity implements OnMapReadyCallb
 
         orderProListV = findViewById(R.id.driverOrderProList);
         orderId = Integer.parseInt(getIntent().getStringExtra("orderId"));
-        lat = Double.parseDouble(getIntent().getStringExtra("lat"));
-        lon = Double.parseDouble(getIntent().getStringExtra("lon"));
+        lat = Double.parseDouble(getIntent().getStringExtra("orderLat"));
+        lon = Double.parseDouble(getIntent().getStringExtra("orderLon"));
 
-        getLocationPermission();
+
+        initMap();
 
         orderProHandlerThread = new HandlerThread("OrderProductsHandlerThread");
         orderProHandlerThread.start();
@@ -117,10 +118,7 @@ public class DriverNavigate extends AppCompatActivity implements OnMapReadyCallb
         mMap = googleMap;
 
         if (mLocationPermissionsGranted) {
-            LatLng currentLocation = getDeviceLocation();
-            if (currentLocation!=null)
-                moveCamera(currentLocation, DEFAULT_ZOOM);
-            calculateDirections();
+            getDeviceLocation();
             mMap.addMarker(new MarkerOptions().title("dest").position(new LatLng(lat, lon)));
         }
     }
@@ -143,6 +141,8 @@ public class DriverNavigate extends AppCompatActivity implements OnMapReadyCallb
                             Log.d(TAG, "onComplete: GetDeviceLocation lat is: " + currentLocation.getLatitude() +
                                     "lon is: " + currentLocation.getLongitude());
                             deviceLoc = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                            calculateDirections();
+                            moveCamera(deviceLoc,15f);
                         }else{
                             Log.d(TAG, "onComplete: current location is null");
                             Toast.makeText(DriverNavigate.this, "unable to get current location", Toast.LENGTH_SHORT).show();
@@ -258,6 +258,7 @@ public class DriverNavigate extends AppCompatActivity implements OnMapReadyCallb
 
     private void calculateDirections(){
         Log.d(TAG, "calculateDirections: calculating directions.");
+
 
         com.google.maps.model.LatLng destination = new com.google.maps.model.LatLng(
                 lat,

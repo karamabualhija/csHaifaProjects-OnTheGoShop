@@ -1,6 +1,7 @@
 package com.project.OnTheGoShop.BL;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,11 @@ public class ProductBL {
 	}
 
 	public void add(Product p) {
+		List<Product> products = productRepository.findByName(p.getName());
+		if (products.size()==1){
+			productRepository.updatestorage(products.get(0).getId(), products.get(0).getAmount() + p.getAmount());
+			return;
+		}
 		productRepository.save(p);
 		
 	}
@@ -36,7 +42,7 @@ public class ProductBL {
 	}
 
 	public void updatestorage(int pro_id, int amount) {
-		productRepository.updatestorage(pro_id,  amount)	;	
+		productRepository.updatestorage(pro_id,  amount)	;
 	}
 	
 

@@ -27,53 +27,55 @@ public class OrderController {
 	UserBL userbl;
 	
 	@GetMapping("placeOrder")
-	String place(@RequestParam List<JSONObject> jsonstrinf, @RequestParam int user_id, @RequestParam String lat, @RequestParam String lon) throws ParseException
+	String place(@RequestParam String jsonstrinf, @RequestParam int user_id, @RequestParam String lat, @RequestParam String lon) throws ParseException
 	{
 		return orderbl.placeorder(jsonstrinf,user_id,lat,lon);
-		
-		
 	}
 	
 	@SuppressWarnings("unchecked")
 	@GetMapping("ActiveOrders")
-	JSONArray getActiveOrders(HttpSession session)
+	JSONArray getActiveOrders(@RequestParam int userId)
 	{
-		int sys_id=(int) session.getAttribute("id");
-		ArrayList<Order> res=(ArrayList<Order>) userbl.finduserorders(sys_id);
+		int sys_id=userId;
+		List<Order> res= userbl.finduserorders(sys_id);
 	    JSONArray jsonArray = new JSONArray();
-	    for(int i=0;i<res.size()&&res.get(i).isPending();i++)
+	    for(int i=0;i<res.size();i++)
 	    {
-    		int id=res.get(i).getId();
-    		String lan=res.get(i).getLan();
-    		String lat=res.get(i).getLat();    		
-		   JSONObject jo = new JSONObject();
-		   jo.put("id", id);
-		   jo.put("lan", lan);
-		   jo.put("lat", lat);
-		   jo.put("price",orderbl.findprice(id) );
-		   jsonArray.add(jo);
+	    	if (res.get(i).isPending()){
+				int id=res.get(i).getId();
+				String lan=res.get(i).getLan();
+				String lat=res.get(i).getLat();
+				JSONObject jo = new JSONObject();
+				jo.put("id", id);
+				jo.put("lan", lan);
+				jo.put("lat", lat);
+				jo.put("price",orderbl.findprice(id) );
+				jsonArray.add(jo);
+			}
 	    }
 	    return jsonArray;
 		
 	}
 	@SuppressWarnings("unchecked")
 	@GetMapping("OldOrders")
-	JSONArray getOldOrders(HttpSession session)
+	JSONArray getOldOrders(@RequestParam int userId)
 	{
-		int sys_id=(int) session.getAttribute("id");
-		ArrayList<Order> res=(ArrayList<Order>) userbl.finduserorders(sys_id);
+		int sys_id=userId;
+		List<Order> res= userbl.finduserorders(sys_id);
 	    JSONArray jsonArray = new JSONArray();
-	    for(int i=0;i<res.size()&&!(res.get(i).isPending());i++)
+	    for(int i=0;i<res.size();i++)
 	    {
-    		int id=res.get(i).getId();
-    		String lan=res.get(i).getLan();
-    		String lat=res.get(i).getLat();    		
-		   JSONObject jo = new JSONObject();
-		   jo.put("id", id);
-		   jo.put("lan", lan);
-		   jo.put("lat", lat);
-		   jo.put("price",orderbl.findprice(id) );
-		   jsonArray.add(jo);
+	    	if (!(res.get(i).isPending())){
+				int id=res.get(i).getId();
+				String lan=res.get(i).getLan();
+				String lat=res.get(i).getLat();
+			   	JSONObject jo = new JSONObject();
+			   	jo.put("id", id);
+			   	jo.put("lan", lan);
+			   	jo.put("lat", lat);
+			   	jo.put("price",orderbl.findprice(id) );
+			   	jsonArray.add(jo);
+	    	}
 	    }
 	    return jsonArray;
 	}
@@ -81,9 +83,9 @@ public class OrderController {
 	@GetMapping("getUserOrders")
 	JSONArray getUserOrders(@RequestParam String username)
 	{
-		ArrayList<Order> res=(ArrayList<Order>) userbl.finduserorders(username);
+		List<Order> res= userbl.finduserorders(username);
 	    JSONArray jsonArray = new JSONArray();
-	    for(int i=0;i<res.size()&&!(res.get(i).isPending());i++)
+	    for(int i=0;i<res.size();i++)
 	    {
     		int id=res.get(i).getId();
     		String lan=res.get(i).getLan();
@@ -102,9 +104,9 @@ public class OrderController {
 	@GetMapping("AllOrders")
 	JSONArray getAllOrders()
 	{
-		ArrayList<Order> res=(ArrayList<Order>) orderbl.findallorders();
+		List<Order> res= orderbl.findallorders();
 	    JSONArray jsonArray = new JSONArray();
-	    for(int i=0;i<res.size()&&!(res.get(i).isPending());i++)
+	    for(int i=0;i<res.size();i++)
 	    {
     		int id=res.get(i).getId();
     		String lan=res.get(i).getLan();
