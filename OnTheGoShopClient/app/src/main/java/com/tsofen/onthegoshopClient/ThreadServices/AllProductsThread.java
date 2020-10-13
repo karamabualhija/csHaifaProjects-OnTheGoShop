@@ -46,7 +46,7 @@ public class AllProductsThread implements Runnable{
                         JSONObject object = jsonArray.getJSONObject(i);
                         Product product = new Product();
                         if (object.has("amount"))
-                            product.setAmount(object.getDouble("amount"));
+                            product.setAmount(object.getInt("amount"));
                         if (object.has("name"))
                             product.setName(object.getString("name"));
                         if (object.has("price"))

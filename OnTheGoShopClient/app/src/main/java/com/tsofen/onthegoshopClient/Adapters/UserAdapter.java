@@ -26,9 +26,11 @@ public class UserAdapter extends ArrayAdapter<User> {
     {
         View layout = this.inflater.inflate(R.layout.user_shape, null);
         User user = getItem(position);
-        TextView username= layout.findViewById(R.id.UserNameshape);
+        TextView name= layout.findViewById(R.id.UserNameshape);
+        TextView username= layout.findViewById(R.id.AllUserUsername);
         TextView userph = layout.findViewById(R.id.UserPhoneshape);
-        username.setText(user.getName());
+        name.setText(user.getName());
+        username.setText(user.getUsername());
         userph.setText(String.valueOf(user.getPhonenumber()));
         return layout;
     }

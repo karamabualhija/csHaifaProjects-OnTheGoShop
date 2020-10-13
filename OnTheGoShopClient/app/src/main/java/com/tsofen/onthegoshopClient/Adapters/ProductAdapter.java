@@ -29,9 +29,11 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         ImageView proimg=layout.findViewById(R.id.productImage);
         TextView proname= layout.findViewById(R.id.productName);
         TextView proprice = layout.findViewById(R.id.productprice);
+        TextView proid = layout.findViewById(R.id.productId);
         proimg.setImageResource(pro.getImageResId());
         proname.setText(pro.getName());
         proprice.setText(Float.toString(pro.getPrice()));
+        proid.setText(String.valueOf(pro.getId()));
         return layout;
 
     }

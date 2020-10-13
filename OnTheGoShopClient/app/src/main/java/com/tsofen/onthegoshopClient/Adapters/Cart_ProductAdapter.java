@@ -32,11 +32,13 @@ public class Cart_ProductAdapter extends ArrayAdapter<Product> {
         ImageView proimg=layout.findViewById(R.id.productImagecart);
         TextView proname= layout.findViewById(R.id.productNameCart);
         TextView proprice = layout.findViewById(R.id.productpriceCart);
+        TextView proid = layout.findViewById(R.id.productIdCart);
         EditText spin=layout.findViewById(R.id.amount_spinner);
 
         proimg.setImageResource(pro.getImageResId());
         proname.setText(pro.getName());
         proprice.setText(Float.toString(pro.getPrice()));
+        proid.setText(String.valueOf(pro.getId()));
 
         return layout;
 

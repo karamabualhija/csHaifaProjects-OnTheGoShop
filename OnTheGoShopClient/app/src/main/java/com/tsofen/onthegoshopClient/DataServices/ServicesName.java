@@ -19,7 +19,7 @@ public enum ServicesName {
     AllOrders("Order/AllOrders"),
     OldOrders("Order/OldOrders"),
     ActiveOrder("Order/ActiveOrders"),
-    OrderDetails("Order/OrderDetails"),
+    OrderDetails("Order/OrderPro"),
     getUserOrders("Order/getUserOrders"),
     PlaceOrder("Order/placeOrder");
 

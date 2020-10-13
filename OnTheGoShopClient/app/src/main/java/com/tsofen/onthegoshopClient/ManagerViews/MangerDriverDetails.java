@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +29,7 @@ import com.tsofen.onthegoshopClient.Beans.Product;
 import com.tsofen.onthegoshopClient.DataHandlers.DriverLocationHandler;
 import com.tsofen.onthegoshopClient.DataHandlers.DriverOrdersHandler;
 import com.tsofen.onthegoshopClient.DataHandlers.DriverProductsHandler;
+import com.tsofen.onthegoshopClient.DriverViews.DriverMain;
 import com.tsofen.onthegoshopClient.R;
 import com.tsofen.onthegoshopClient.ThreadServices.DriverLocationThread;
 import com.tsofen.onthegoshopClient.ThreadServices.DriverOrdersThread;
@@ -55,6 +57,7 @@ public class MangerDriverDetails extends AppCompatActivity implements OnMapReady
     private ArrayList<Order> orders;
     private DriverDetailsOrderAdapter orderAdapter;
 
+    private Timer timer;
     private HandlerThread driverDetailsProductHandlerThread;
     private HandlerThread driverDetailsOrderHandlerThread;
 
@@ -142,7 +145,7 @@ public class MangerDriverDetails extends AppCompatActivity implements OnMapReady
 
 
     public void refreshDriverLocation(){
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask()
         {
             public void run()
@@ -196,5 +199,14 @@ public class MangerDriverDetails extends AppCompatActivity implements OnMapReady
             driverDetailsOrderHandlerThread.quit();
         if (driverDetailsProductHandlerThread!=null && driverDetailsProductHandlerThread.isAlive())
             driverDetailsProductHandlerThread.quit();
+        timer.cancel();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        timer.cancel();
+        Intent intent = new Intent(this, ManagerMain.class);
+        startActivity(intent);
     }
 }

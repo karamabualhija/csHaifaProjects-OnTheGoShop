@@ -7,11 +7,11 @@ public class Product implements Serializable {
 
     int id;
     String name;
-    double amount;
+    int amount;
     float price;
     private int ImageResId;
 
-    public Product(String name, double amount, float price) {
+    public Product(String name, int amount, float price) {
         this.name = name;
         this.amount = amount;
         this.price = price;
@@ -46,11 +46,11 @@ public class Product implements Serializable {
     }
 
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

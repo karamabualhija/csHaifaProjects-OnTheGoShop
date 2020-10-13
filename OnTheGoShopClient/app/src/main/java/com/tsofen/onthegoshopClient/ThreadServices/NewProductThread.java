@@ -17,10 +17,10 @@ public class NewProductThread implements Runnable {
 
     private String name;
     private Float price;
-    private double amount;
+    private int amount;
     private NewProductHandler handle;
 
-    public NewProductThread(String name, Float price, double amount, NewProductHandler handle) {
+    public NewProductThread(String name, Float price, int amount, NewProductHandler handle) {
         this.name = name;
         this.price = price;
         this.amount = amount;

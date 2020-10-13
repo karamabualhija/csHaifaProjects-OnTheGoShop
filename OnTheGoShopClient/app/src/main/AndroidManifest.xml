@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DriverViews.DriverNewProduct"></activity>
+        <activity android:name=".ManagerViews.ManagerUserOrders"></activity>
+        <activity android:name=".DriverViews.DriverNewProduct" />
         <activity android:name=".DriverViews.DriverNavigate" />
         <activity android:name=".DriverViews.VanStorage" />
         <activity android:name=".DriverViews.DriverMain" />
@@ -50,6 +51,8 @@
         <service
             android:name=".BackgroundServices.LocationService"
             android:stopWithTask="true" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     </application>
 
 </manifest>

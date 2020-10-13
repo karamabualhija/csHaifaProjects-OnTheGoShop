@@ -15,6 +15,7 @@ package com.tsofen.onthegoshopClient.UserViews;
 
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -49,6 +50,7 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.tsofen.onthegoshopClient.Beans.Order;
 import com.tsofen.onthegoshopClient.Beans.Product;
+import com.tsofen.onthegoshopClient.DBHandler.CartDBHandler;
 import com.tsofen.onthegoshopClient.DataHandlers.PlaceOrderHandler;
 import com.tsofen.onthegoshopClient.R;
 import com.tsofen.onthegoshopClient.ThreadServices.PlaceOrderThread;
@@ -241,32 +243,38 @@ public class OrderMapActivity extends AppCompatActivity implements
         getDeviceLocation();
         newOrder.setLatLng(userLatLng);
         ArrayList<Product> products = (ArrayList<Product>) newOrder.getProducts();
-//        List<Product> proJson = new ArrayList<>();
-//        try {
-//            for (Product product : products) {
-//                JSONObject object = new JSONObject();
-//                object.put("id", product.getId());
-//                object.put("name", product.getName());
-//                object.put("amount", product.getAmount());
-//                object.put("price", product.getPrice());
-//                proJson.add(object);
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-        String jsonPro = products.toString();
+        JSONArray proJson = new JSONArray();
+        try {
+            for (Product product : products) {
+                JSONObject object = new JSONObject();
+                object.put("id", product.getId());
+                object.put("name", product.getName());
+                object.put("amount", product.getAmount());
+                object.put("price", product.getPrice());
+                proJson.put(object);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String jsonPro = proJson.toString();
         String userId = getSharedPreferences("login", MODE_PRIVATE).getString("id", null);
         PlaceOrderThread placeOrderThread = new PlaceOrderThread(jsonPro, Integer.parseInt(userId)
                 , String.valueOf(newOrder.getLatLng().latitude), String.valueOf(newOrder.getLatLng().longitude),
                 new PlaceOrderHandler() {
             @Override
             public void onOrderPlaced() {
-
+                CartDBHandler dbHandler = new CartDBHandler(OrderMapActivity.this,null,3);
+                dbHandler.deleteProducts();
+                Intent intent = new Intent(OrderMapActivity.this,UserMainView.class);
+                OrderMapActivity.this.finishAffinity();
+                startActivity(intent);
+                //TODO set the cart num to 0
             }
 
             @Override
             public void onFailure() {
-
+                Toast.makeText(OrderMapActivity.this,"couldn't make the order try decreasing the amount",
+                        Toast.LENGTH_LONG).show();
             }
         });
         Handler handler = new Handler(placeOrderHandlerThread.getLooper());
@@ -277,7 +285,20 @@ public class OrderMapActivity extends AppCompatActivity implements
         Log.d(TAG, "useChosenLocation: send the choosen location");
         newOrder.setLatLng(userLatLng);
         Log.d(TAG, "useChosenLocation: the new Order:" + newOrder.toString());
-        JSONArray proJson = new JSONArray(newOrder.getProducts());
+        ArrayList<Product> products = (ArrayList<Product>) newOrder.getProducts();
+        JSONArray proJson = new JSONArray();
+        try {
+            for (Product product : products) {
+                JSONObject object = new JSONObject();
+                object.put("id", product.getId());
+                object.put("name", product.getName());
+                object.put("amount", product.getAmount());
+                object.put("price", product.getPrice());
+                proJson.put(object);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         String jsonPro = proJson.toString();
         String userId = getSharedPreferences("login", MODE_PRIVATE).getString("id", null);
         Log.d(TAG, "useChosenLocation: new Order Products: " + newOrder.getProducts().toString());
@@ -286,12 +307,18 @@ public class OrderMapActivity extends AppCompatActivity implements
                 new PlaceOrderHandler() {
                     @Override
                     public void onOrderPlaced() {
-
+                        CartDBHandler dbHandler = new CartDBHandler(OrderMapActivity.this,null,3);
+                        dbHandler.deleteProducts();
+                        Intent intent = new Intent(OrderMapActivity.this,UserMainView.class);
+                        OrderMapActivity.this.finishAffinity();
+                        startActivity(intent);
+                        //TODO set the cart num to 0
                     }
 
                     @Override
                     public void onFailure() {
-
+                        Toast.makeText(OrderMapActivity.this,"couldn't make the order try decreasing the amount",
+                                Toast.LENGTH_LONG).show();
                     }
                 });
         Handler handler = new Handler(placeOrderHandlerThread.getLooper());
@@ -303,5 +330,13 @@ public class OrderMapActivity extends AppCompatActivity implements
         super.onDestroy();
         if (placeOrderHandlerThread!=null && placeOrderHandlerThread.isAlive())
             placeOrderHandlerThread.quit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this,UserMainView.class);
+        finish();
+        startActivity(intent);
     }
 }

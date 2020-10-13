@@ -91,7 +91,7 @@ public class VanController {
 	    	int orid=orders.get(i).getId();
 		   JSONObject jo = new JSONObject();
 		   jo.put("id", orid);
-		   jo.put("price",orderbl.findprice(id) );
+		   jo.put("price",orderbl.findprice(orid) );
 		   jo.put("lan", orders.get(i).getLan());
 		   jo.put("lat", orders.get(i).getLat());
 		   jsonArray.add(jo);
@@ -136,7 +136,6 @@ public class VanController {
 			vanpr.updateamount(vp.getId(),vp.getAmount()+amount);
 		}
 
-		probl.updatestorage(pro_id, proamount-amount);
 		return "successss";
 	}
 

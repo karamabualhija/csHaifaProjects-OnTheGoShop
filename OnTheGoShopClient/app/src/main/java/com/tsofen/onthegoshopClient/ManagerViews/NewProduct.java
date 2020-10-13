@@ -59,7 +59,7 @@ public class NewProduct extends AppCompatActivity {
         }
 
         String name =  newProductName.getText().toString();
-        double amount = Double.parseDouble(newProductAmount.getText().toString());
+        int amount = Integer.parseInt(newProductAmount.getText().toString());
         float price = Float.parseFloat(newProductPrice.getText().toString());
 
         newProductHandlerThread = new HandlerThread("newProductHandlerThread");

@@ -48,7 +48,7 @@ public class DriverProductsThread implements Runnable {
                                 Product product = new Product();
                                 product.setPrice((float) object.getDouble("price"));
                                 product.setName(object.getString("name"));
-                                product.setAmount(object.getDouble("amount"));
+                                product.setAmount(object.getInt("amount"));
                                 products.add(product);
                             }
                         }

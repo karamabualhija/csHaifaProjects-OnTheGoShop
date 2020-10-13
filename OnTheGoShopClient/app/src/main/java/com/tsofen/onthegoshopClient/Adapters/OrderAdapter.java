@@ -28,7 +28,7 @@ public class OrderAdapter extends ArrayAdapter<Order> {
         Order order = getItem(position);
         TextView orderid= layout.findViewById(R.id.orderid);
         TextView orderprice = layout.findViewById(R.id.orderprice);
-        orderid.setText(order.getId());
+        orderid.setText(String.valueOf(order.getId()));
         orderprice.setText(Float.toString(order.getTotalPrice()));
         return layout;
 

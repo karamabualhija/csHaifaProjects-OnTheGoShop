@@ -1,9 +1,11 @@
 package com.tsofen.onthegoshopClient.UserViews;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,14 +25,17 @@ import java.util.ArrayList;
 
 public class UserOrderFragment extends Fragment {
 
-    ListView userOrderList;
-    LinearLayout allOrders;
-    LinearLayout oldOrders;
-    ArrayList<Order> ordersToShow;
-    OrderAdapter orderAdapter;
-    HandlerThread userOrderHandlerThread;
-    Handler handler;
-    UserOrderThread orderThread;
+    private static final String TAG = "UserOrderFragment";
+
+    private ListView userOrderList;
+    private LinearLayout allOrders;
+    private LinearLayout oldOrders;
+    private ArrayList<Order> ordersToShow;
+    private OrderAdapter orderAdapter = null;
+    private HandlerThread userOrderHandlerThread;
+    private Handler handler;
+    private UserOrderThread orderThread;
+    int userID;
 
     public UserOrderFragment() {
         // Required empty public constructor
@@ -46,6 +51,12 @@ public class UserOrderFragment extends Fragment {
         allOrders = view.findViewById(R.id.allOrderLin);
         oldOrders = view.findViewById(R.id.oldOrderLin);
         allOrders.setPressed(true);
+
+        userID = Integer.parseInt(getActivity().getSharedPreferences("login", Context.MODE_PRIVATE).getString("id",null));
+
+        ordersToShow = new ArrayList<>();
+        orderAdapter = new OrderAdapter(getContext(), ordersToShow);
+        userOrderList.setAdapter(orderAdapter);
 
         userOrderHandlerThread = new HandlerThread("userOrderHandlerThread");
         userOrderHandlerThread.start();
@@ -71,13 +82,14 @@ public class UserOrderFragment extends Fragment {
             public void onClick(View view) {
                 allOrders.setPressed(true);
                 oldOrders.setPressed(false);
-                orderThread = new UserOrderThread(UserOrderThread.WAITING_ORDERS, new UserOrderHandler() {
+                orderThread = new UserOrderThread(UserOrderThread.WAITING_ORDERS, userID, new UserOrderHandler() {
                     @Override
                     public void onOrdersReceived(final ArrayList<Order> orders) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                ordersToShow = orders;
+                                ordersToShow.clear();
+                                ordersToShow.addAll(orders);
                                 orderAdapter.notifyDataSetChanged();
                             }
                         });
@@ -93,13 +105,14 @@ public class UserOrderFragment extends Fragment {
             public void onClick(View view) {
                 allOrders.setPressed(false);
                 oldOrders.setPressed(true);
-                orderThread = new UserOrderThread(UserOrderThread.OLD_ORDERS, new UserOrderHandler() {
+                orderThread = new UserOrderThread(UserOrderThread.OLD_ORDERS, userID, new UserOrderHandler() {
                     @Override
                     public void onOrdersReceived(final ArrayList<Order> orders) {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                ordersToShow = orders;
+                                ordersToShow.clear();
+                                ordersToShow.addAll(orders);
                                 orderAdapter.notifyDataSetChanged();
                             }
                         });

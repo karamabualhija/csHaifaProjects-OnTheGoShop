@@ -34,6 +34,7 @@
 
         </TextView>
 
+
         <EditText
             android:id="@+id/amount_spinner"
             android:layout_width="153dp"
@@ -43,6 +44,11 @@
             android:hint="@string/product_amount"
          />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:id="@+id/productIdCart"/>
     </LinearLayout>
 
     <Button
