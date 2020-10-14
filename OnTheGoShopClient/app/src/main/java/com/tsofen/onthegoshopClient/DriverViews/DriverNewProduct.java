@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -31,6 +32,7 @@ public class DriverNewProduct extends AppCompatActivity {
     private AddProductVanAdapter adapter;
 
     private HandlerThread getStorageHandlerThread;
+    private HandlerThread addProductHandlerThread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,8 @@ public class DriverNewProduct extends AppCompatActivity {
         product.setAmount(Integer.parseInt(spin.getSelectedItem().toString()));
         SharedPreferences sharedPreferences = getSharedPreferences("login", MODE_PRIVATE);
         String vanId = sharedPreferences.getString("vanNum", null);
+        addProductHandlerThread = new HandlerThread("addProductToVanHandlerThread");
+        addProductHandlerThread.start();
         AddProductVanThread productVanThread = new AddProductVanThread(String.valueOf(product.getId()),
                 String.valueOf(product.getAmount()), vanId, new NewProductHandler() {
                     @Override
@@ -79,7 +83,6 @@ public class DriverNewProduct extends AppCompatActivity {
                         Toast.makeText(DriverNewProduct.this, "product added", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(DriverNewProduct.this, VanStorage.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        finishAffinity();
                         startActivity(intent);
                     }
 
@@ -93,8 +96,8 @@ public class DriverNewProduct extends AppCompatActivity {
                         Toast.makeText(DriverNewProduct.this, "Failed to add Product", Toast.LENGTH_SHORT).show();
                     }
                 });
-        Handler handler = new Handler(getStorageHandlerThread.getLooper());
-        handler.post(productVanThread);
+        Handler handler2 = new Handler(addProductHandlerThread.getLooper());
+        handler2.post(productVanThread);
     }
 
     @Override
@@ -102,5 +105,7 @@ public class DriverNewProduct extends AppCompatActivity {
         super.onDestroy();
         if (getStorageHandlerThread!=null && getStorageHandlerThread.isAlive())
             getStorageHandlerThread.quit();
+        if (addProductHandlerThread!=null && addProductHandlerThread.isAlive())
+            addProductHandlerThread.quit();
     }
 }

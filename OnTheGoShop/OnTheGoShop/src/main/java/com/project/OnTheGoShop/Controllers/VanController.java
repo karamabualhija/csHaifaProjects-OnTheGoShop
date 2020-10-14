@@ -127,15 +127,23 @@ public class VanController {
 		if(proamount<amount)
 			return "there not enough storage";
 		probl.updatestorage(pro_id,proamount-amount);
-		van_products vp=vanpr.findByProductid(pro_id);
+		List<van_products> vp=vanpr.findByVanid(van_id);
 		if(vp==null) {
 			System.out.println("van id: " + van_id);
-		vp= new van_products(van_id,pro_id,amount);
-		vanpr.save(vp);}
-		else {
-			vanpr.updateamount(vp.getId(),vp.getAmount()+amount);
+			van_products vanProducts= new van_products(van_id,pro_id,amount);
+			vanpr.save(vanProducts);
 		}
-
+		else {
+			for (int i = 0; i < vp.size(); i++) {
+				van_products temp = vp.get(i);
+				if (temp.getProductid() == pro_id) {
+					vanpr.updateamount(temp.getId(), temp.getAmount() + amount);
+					return "success";
+				}
+			}
+			van_products vanProducts2 = new van_products(van_id,pro_id,amount);
+			vanpr.save(vanProducts2);
+		}
 		return "successss";
 	}
 
