@@ -43,6 +43,8 @@ public class LogInThread implements Runnable{
         textDownloader.getText(urlMaker.createUrl(ServicesName.LogIn, params), new OnDataReadyHandler() {
             @Override
             public void onDataDownloadCompleted(String downloadedData) {
+                if (downloadedData.isEmpty())
+                    logInHandler.OnLogInFailure();
                 try {
                     JSONObject jsonObject = new JSONObject(downloadedData);
                     if (jsonObject.has("type")){

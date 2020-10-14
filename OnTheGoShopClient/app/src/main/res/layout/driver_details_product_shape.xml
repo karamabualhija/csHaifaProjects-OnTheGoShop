@@ -5,7 +5,6 @@
     android:weightSum="100"
     >
     <TextView
-        android:layout_marginStart="150dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/productNameDriverDetails"
@@ -16,7 +15,6 @@
         android:layout_weight="30"
         />
     <TextView
-        android:layout_marginStart="150dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/productAmountDriverDetails"
@@ -27,7 +25,6 @@
         android:layout_weight="30"
         />
     <TextView
-        android:layout_marginStart="150dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/productPriceDriverDetails"
