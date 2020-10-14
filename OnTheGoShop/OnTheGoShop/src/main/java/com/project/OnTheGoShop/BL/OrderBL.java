@@ -103,10 +103,11 @@ public class OrderBL {
 
 	private int addtodriver(Order order) {
 		ArrayList<Driver> drivers=driverbl.findalldrivers();
+		ArrayList<Driver> potentialDrivers = new ArrayList<>();
 		Driver driver=null;
 		double lat=Double.parseDouble(order.getLat());
 		double lon=Double.parseDouble(order.getLan());
-		double distance=Double.MAX_VALUE,newdistance;
+//		double distance=Double.MAX_VALUE,newdistance;
 	    for(int i=0;i<drivers.size();i++)
 	    {
 	    	Van v=drivers.get(i).getVan();
@@ -115,14 +116,16 @@ public class OrderBL {
 	    	
 	    	if (flag) {
 				System.out.println("Van num: " + v.getId() + " has enough of everything");
-	    		newdistance=Sort.distance(Double.parseDouble(v.getLatitude()),Double.parseDouble(v.getLang()),lat, lon);
-	    		if (newdistance<distance) {
-	    			distance=newdistance;
-	    			driver=drivers.get(i);
-	    		}
+				potentialDrivers.add(drivers.get(i));
+//	    		newdistance=Sort.distance(Double.parseDouble(v.getLatitude()),Double.parseDouble(v.getLang()),lat, lon);
+//	    		if (newdistance<distance) {
+//	    			distance=newdistance;
+//	    			driver=drivers.get(i);
+//	    		}
 	    	}
 	    	
 	    }
+	    driver = choosePotentialDriver(potentialDrivers, order);
 		if (driver!=null) {
 			System.out.println("the order will be add at drivers: " + driver.getVan().getId());
 			driver.getVan().addorder(order);
@@ -135,6 +138,29 @@ public class OrderBL {
 			return -1;
 		}
 		return 1;
+	}
+
+	private Driver choosePotentialDriver(ArrayList<Driver> potentialDrivers, Order order) {
+		int max = Integer.MAX_VALUE;
+		double distance=Double.MAX_VALUE,newdistance;
+		double lat=Double.parseDouble(order.getLat());
+		double lon=Double.parseDouble(order.getLan());
+		Driver driver = null;
+		for (int i = 0; i < potentialDrivers.size(); i++){
+			Van v = potentialDrivers.get(i).getVan();
+			newdistance=Sort.distance(Double.parseDouble(v.getLatitude()),Double.parseDouble(v.getLang()),lat, lon);
+			if (potentialDrivers.get(i).getVan().getOrders().size() < max){
+				driver = potentialDrivers.get(i);
+				distance=newdistance;
+				max = potentialDrivers.get(i).getVan().getOrders().size();
+			}else if (potentialDrivers.get(i).getVan().getOrders().size() == max && newdistance<distance){
+				driver = potentialDrivers.get(i);
+				distance=newdistance;
+				max = potentialDrivers.get(i).getVan().getOrders().size();
+			}
+
+		}
+		return driver;
 	}
 
 	private void updatevanstorage(Van van, Order order) {

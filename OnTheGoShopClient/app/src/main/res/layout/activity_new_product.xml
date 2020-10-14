@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     tools:context=".ManagerViews.NewProduct"
     android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/background"
+    >
 
     <TextView
         android:layout_weight="1"
@@ -51,8 +52,6 @@
             android:background="@drawable/roundedbutton"
             android:layout_rowWeight="1"
             android:layout_gravity="center"/>
-        <TextView
-            android:text="image"/>
         <Button
             android:layout_width="300dp"
             android:layout_rowWeight="1"

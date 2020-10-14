@@ -114,7 +114,7 @@ public class VanController {
 	@GetMapping("updatelocation")
 	void updatelocation(@RequestParam String lan,@RequestParam String lag,@RequestParam int id)
 	{	   
-	  vanbl.updatelocation(lag,lan,id);
+	  vanbl.updatelocation(lan,lag,id);
 	  Van v=vanbl.findvan(id);
 	  Sort.Updatedistances(v.getOrders(),lag,lan);
 	 		
