@@ -110,9 +110,11 @@ public class OrderBL {
 	    for(int i=0;i<drivers.size();i++)
 	    {
 	    	Van v=drivers.get(i).getVan();
+			System.out.println("the driver name is: " + drivers.get(i).getName() + " the van is: " + v.getId());
 	    	boolean flag=checkstorage(v,order) ;
 	    	
 	    	if (flag) {
+				System.out.println("Van num: " + v.getId() + " has enough of everything");
 	    		newdistance=Sort.distance(Double.parseDouble(v.getLatitude()),Double.parseDouble(v.getLang()),lat, lon);
 	    		if (newdistance<distance) {
 	    			distance=newdistance;
@@ -122,6 +124,7 @@ public class OrderBL {
 	    	
 	    }
 		if (driver!=null) {
+			System.out.println("the order will be add at drivers: " + driver.getVan().getId());
 			driver.getVan().addorder(order);
 			updatevanstorage(driver.getVan(),order);
 			driverbl.driverrepo.save(driver);
@@ -138,7 +141,7 @@ public class OrderBL {
 		ArrayList<order_product> orderproducts=oderprorepo.findAllByOrderid(order.getId());
 	    for(int i=0;i<orderproducts.size();i++)
 	    {
-	    	van_products vp=vanprorepo.findByProductid(orderproducts.get(i).getProductid());
+	    	van_products vp=vanprorepo.findByVanIdAndProductId(van.getId(),orderproducts.get(i).getProductid());
 	    	
 	    	vanprorepo.updateamount(vp.getId(), vp.getAmount()-orderproducts.get(i).getAmount());
 	    }
@@ -148,11 +151,21 @@ public class OrderBL {
 		ArrayList<order_product> orderproducts=oderprorepo.findAllByOrderid(order.getId());
 	    for(int i=0;i<orderproducts.size();i++)
 	    {
-	    	van_products vp=vanprorepo.findByProductid(orderproducts.get(i).getProductid());
-	    	if(vp==null) return false;
-	    	if(vp.getAmount()<orderproducts.get(i).getAmount()) 
-	    		return false;	
+	    	van_products vanProducts = vanprorepo.findByVanIdAndProductId(v.getId(),orderproducts.get(i).getProductid());
+	    	if (vanProducts==null)
+	    		return false;
+	    	if (vanProducts.getAmount()<orderproducts.get(i).getAmount())
+	    		return false;
+//	    	List<van_products> vp=vanprorepo.findByVanid(v.getId());
+//	    	if(vp==null) return false;
+//			for (int j = 0; j < vp.size(); j++) {
+//				if (vp.get(j).getProductid() == orderproducts.get(i).getProductid()){
+//					if (vp.get(j).getAmount() < orderproducts.get(i).getAmount())
+//						return false;
+//				}
+//			}
 	    }
+		System.out.println("Van num: " + v.getId() + " has enough of everything");
 	    return true;
 	}
 
